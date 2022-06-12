@@ -5,6 +5,8 @@ import loginController from "../controllers/loginController";
 import editProfileController from "../controllers/editProfileController";
 import editPreffController from "../controllers/editPreffController";
 import skillsController from "../controllers/skillsController.js";
+
+import adminController from "../controllers/adminController";
 import auth from "../validation/authValidation";
 import passport from "passport";
 import initPassportLocal from "../controllers/passportLocalController";
@@ -39,6 +41,19 @@ let initWebRoutes = (app) => {
     router.get("/editSkill",loginController.checkLoggedIn,skillsController.editSkill);
     router.post("/editSkill/:id", skillsController.editSkillUser);
     
+    router.get("/admin-login", adminController.getPageAdminLogin);
+    router.post(
+        "/admin-login",
+        passport.authenticate("local", {
+            successRedirect: "/admin",
+            failureRedirect: "/admin-login",
+            successFlash: true,
+            failureFlash: true,
+        })
+    );
+    // router.get("/admin", adminController.authenticate, adminController.getPage);
+    router.get("/admin", adminController.authenticate, adminController.getPage);
+    router.get("/search", adminController.authenticate,  adminController.getvolunteer);
     return app.use("/", router);
 };
 module.exports = initWebRoutes;
