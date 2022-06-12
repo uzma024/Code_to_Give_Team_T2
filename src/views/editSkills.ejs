@@ -1,77 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<style>
-    ul {
-        padding: 0%;
-        margin: 0 0 0 150px;
-        list-style: none;
-    }
-
-    nav {
-        width: 100%;
-        overflow: auto;
-        background: black;
-        position: fixed;
-    }
-
-    li {
-        float: left;
-    }
-
-    .logo img {
-        position: absolute;
-        margin-top: 15px;
-        margin-left: 10px;
-
-    }
-
-    nav a {
-        width: 100px;
-        display: block;
-        padding: 20px 15px;
-        text-decoration: none;
-        font-family: Arial;
-        color: #f2f2f2;
-        text-align: center;
-    }
-
-    .footer {
-        padding: 10px 0;
-        background-color: #101010;
-        color: #9d9d9d;
-        bottom: 0;
-        width: 100%;
-
-        bottom: 0;
-    }
-</style>
-
-<head>
-
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Registration</title>
-    </head>
-
-<body>
-    <div class="logo"><a href="#"><img
-                src="data:image/png;base64,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"
-                height="40px" width="120px"></a></div>
-    <nav>
-        <ul>
-            <li><a href="/">Event</a></li>
-            <li><a href="/editProfile">Profile</a></li>
-            <li><a href="/editPreff">Edit Preference</a></li>
-            <li><a href="/logout">Sign Out</a></li>
-        </ul>
-    </nav>
-    <br>
-    <br>
-    <br>
+<%- include("Partials/header.ejs") %>
     <section class="h-100 h-custom" style="background-color:white;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -111,14 +38,4 @@
             </div>
         </div>
     </section>
-    <div class="footer">
-        <div class="container">
-            <center>
-                <p>Copyright &copy;ToyBank. All Rights Reserved | Contact Us: +91 90000 00000</p>
-            </center>
-        </div>
-    </div>
-</body>
-</head>
-
-</html>
+    <%- include("Partials/footer.ejs") %>

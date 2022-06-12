@@ -31,65 +31,22 @@
 </head>
 
 <body>
-    <!-- <nav class="navbar">
-        <div class="logo">
-            <img src="images/JMI logo.jpeg" alt="jamia_logo" />
-        </div>
-        <div class="title">
-            <h3 class="upc">University Placement Cell</h3>
-            <p class="jmi">Jamia Millia Islamia, New Delhi</p>
-        </div>
-        <div class="links">
-            <a href="/landingPage#contact" class="contact"><i class="fa fa-solid fa-phone"></i> Contact Us</a
-        >
-        <form method="POST" action="/login">
-          <button type="submit" class="login">
-            <i class="fa fa-sign-in"></i> Login
-          </button>
-        </form>
-      </div>
-    </nav> -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <div class="logo">
-                <img src="images/JMI logo.jpeg" alt="jamia_logo" />
-            </div>
-            <a class="navbar-brand" href="#">TOYBANK</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto ">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/Login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/landingPage#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Our Work</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Event</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/landingPage#contact">Contact</i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    
+    <nav>
+        <!-- <div class="logo"><a href="#"><img
+       src="images/logo.png"
+       height="40px" width="120px"></a></div> -->
+       
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/editProfile">Profile</a></li>
+            <li><a href="/editPreff">Preferences</a></li>
+            <li><a href="/editSkill">Edit Skills</a></li>
+            <li><a href="/logout">Sign Out</a></li>
+        </ul>
+    
     </nav>
-    <div class="top">
-        <p>
-            This sign up is only for volunteers, toybank representatives are requested to login through admins page <a
-                class="comp-link" href="">here</a>.
-        </p>
-    </div>
+   
     <div class="main">
         <h1 class="heading">Create New Account</h1>
         <hr />
@@ -116,6 +73,4 @@
             <input class="next" type="submit" value="Next" />
         </form>
     </div>
-</body>
-
-</html>
+<%- include("Partials/footer.ejs") %>
