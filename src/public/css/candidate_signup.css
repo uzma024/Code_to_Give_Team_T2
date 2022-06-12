@@ -1,0 +1,203 @@
+body {
+    text-align: center;
+    font-family: "Nunito Sans", sans-serif;
+    margin: 0;
+  }
+  
+  input {
+    display: block;
+    margin: 1rem auto;
+    padding: 9px 10px;
+    border-radius: 4px;
+    border: 1px solid;
+    width: 90%;
+    box-sizing: border-box;
+    font-family: "Quicksand", "fontAwesome", sans-serif;
+  }
+  
+  .navbar {
+    border: 1px solid;
+    display: flex;
+    height: 6%;
+    font-size: 1rem;
+    /* font-family: "Open Sans"; */
+    /* font-weight: bolder; */
+  }
+  
+  .nav-link {
+    text-align: left;
+  }
+  
+  .comp-link {
+    text-decoration: none;
+    color: #089d08;
+  }
+  
+  .contact {
+    text-decoration: none;
+    color: #1e2022;
+    font-size: 1rem;
+  }
+  
+  .links {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: 2rem;
+    align-items: center;
+  }
+  
+  .contact,
+  .login {
+    margin: 0.5rem 1rem;
+  }
+  
+  .login {
+    color: white;
+    background-color: #089d08;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1rem;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 1.5rem;
+  }
+  
+  .logo {
+    margin-left: 1%;
+    margin-right: 1.5%;
+  }
+  
+  .logo img {
+    height: 60px;
+    width: 60px;
+    border-radius: 2rem;
+  }
+  
+  .next {
+    color: white;
+    background-color: #089d08;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1rem;
+  }
+  
+  .top {
+    background-color: #c9d6df;
+    width: 33%;
+    height: 30%;
+    margin: 1.5% auto 0;
+    padding: 10px;
+    border-radius: 3px;
+  }
+  
+  .top p {
+    margin-bottom: 0;
+  }
+  
+  .main {
+    background-color: #f0f5f9;
+    width: 35%;
+    /* height: 33%; */
+    margin: 1.5% auto 2%;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+  }
+  
+  .google-signup {
+    background-color: #1e2022;
+    color: white;
+    padding: 0.5rem 2rem;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1rem;
+    border: none;
+    border-radius: 3px;
+    width: 90%;
+    margin-bottom: 3%;
+  }
+  
+  .heading {
+    font-size: 2.3rem;
+  }
+  
+  .google-signup:hover {
+    background-color: #1e2022da;
+    transition: background-color 0.075s;
+  }
+  
+  .login:hover,
+  .next:hover {
+    background-color: #09a809;
+    transition: background-color 0.075s;
+  }
+  
+  .comp-link:hover {
+    text-decoration: underline;
+  }
+  
+  .contact:hover {
+    color: #1e2022b9;
+    transition: background-color 0.075s;
+  }
+  
+  .error {
+    background-color: rgb(211, 97, 97);
+    padding: 0.5rem 2rem;
+    border-radius: 3px;
+    width: 90%;
+    border: none;
+    font-family: "Nunito Sans", sans-serif;
+    margin: 1.5% auto;
+    font-size: medium;
+  }
+  
+  @media (max-width: 768px) {
+    .top {
+      width: 50%;
+    }
+    .main {
+      width: 50%;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .top {
+      width: 55%;
+    }
+    .main {
+      width: 55%;
+    }
+  }
+
+  /* EXTRAS ADDED  */
+  nav {
+    width: 100%;
+    overflow: auto;
+    background: black;
+    position: fixed;
+}
+
+.logo img {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 10px;
+
+}
+
+nav a {
+    width: 100px;
+    display: block;
+    padding: 20px 15px;
+    text-decoration: none;
+    font-family: Arial;
+    color: #f2f2f2;
+    text-align: center;
+}
+
+.footer {
+    padding: 10px 0;
+    background-color: #101010;
+    color: #9d9d9d;
+    bottom: 0;
+    width: 100%;
+
+    bottom: 0;
+}

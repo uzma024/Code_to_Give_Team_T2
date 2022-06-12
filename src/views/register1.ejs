@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    ul {
+        padding: 0%;
+        margin: 0 0 0 150px;
+        list-style: none;
+    }
+
+    nav {
+        width: 100%;
+        overflow: auto;
+        background: black;
+        position: fixed;
+    }
+
+    li {
+        float: left;
+    }
+
+    .logo img {
+        position: absolute;
+        margin-top: 15px;
+        margin-left: 10px;
+
+    }
+
+    nav a {
+        width: 100px;
+        display: block;
+        padding: 20px 15px;
+        text-decoration: none;
+        font-family: Arial;
+        color: #f2f2f2;
+        text-align: center;
+    }
+
+    .footer {
+        padding: 10px 0;
+        background-color: #101010;
+        color: #9d9d9d;
+        bottom: 0;
+        width: 100%;
+
+        bottom: 0;
+    }
+</style>
+
+<head>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration</title>
+    </head>
+
+<body>
+    <!--  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Toybank</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Our Work
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+
+            </ul>
+            
+        </div>
+    </nav>
+-->
+    <div class="logo"><a href="#"><img
+                src="data:image/png;base64,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"
+                height="40px" width="120px"></a></div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Our Work</a></li>
+            <li><a href="#">Event</a></li>
+            <li><a href="/register">Contact</a></li>
+
+        </ul>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <section class="h-100 h-custom" style="background-color:white;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="card rounded-3">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhRDf5R4idZ3871IGtm6ltDP9IT5Fr7q4dZg&usqp=CAU"
+                            class="w-100" style="border-top-left-radius: .2rem; border-top-right-radius: .2rem;"
+                            height="150px" alt="Sample photo">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Info</h3>
+                            <form class="px-md-2" method="POST" action="/editProfile/<%= user.id %>">
+
+                            <!-- <div class="form-outline mb-4">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required
+                                    value="" />
+
+                            </div> -->
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+
+                                    <div class="form-outline datepicker">
+                                        <label for="birthday">DOB:</label>
+                                        <input type="date" id="dob" name="dob" required>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="birthday">Gender:</label>
+                                    <select class="select" id="gender" name="gender">
+
+                                        <option value="1" disabled>Gender</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label for="address">Residential Address</label>
+                                <input type="text" id="address" name="address" class="form-control" />
+
+                            </div>
+                            <!-- <div class="form-outline mb-4">
+                                <label for="address">Professional Address</label>
+                                <input type="text" class="form-control" />
+
+                            </div> -->
+                            <div class="form-outline mb-4">
+                                <label for="address">City</label>
+                                <input type="text" id="city" name="city" class="form-control" />
+
+                            </div>
+
+                            <div class="row">
+                                <!-- <div class="col-md-6 mb-4">
+
+                                    <label for="email">Email ID</label>
+                                    <input type="email" id="email" name="email" class="form-control"   value="" />
+
+                                </div> -->
+                                <div class="col-md-6 mb-4">
+
+
+                                    <label for="contact">Contact</label>
+                                    <input type="number" id="contact" name="contact" class="form-control" required />
+
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <!-- <div class="form-group col-md-6 mb-4">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" value="" >
+                                </div>
+                                <div class="form-group col-md-6 mb-4">
+                                    <label for="password">Confirm Password</label>
+                                    <input type="password" class="form-control" id="cpassword" name="cpassword" value="">
+                                    <small id="emailHelp" class="form-text text-muted">Make sure to type same
+                                        password.</small>
+                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+
+                                    <label for="PartnerInst">Are you student of one of our partner Institutions</label>
+                                    <select class="select" name="institution">
+
+                                        <option value="Aditya Birla school">Aditya Birla school</option>
+                                        <option value="Dhirubhai Ambani School">Dhirubhai Ambani School</option>
+                                        <option value="Hillspring School">Hillspring School</option>
+                                        <option selected="selected" value="Other">Other</option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+
+
+                                    <label for="clg">if Not(Please specify your school/college name)</label>
+                                    <input type="text" name="other_inst" id="institution_other"
+                                        class="form-control" />
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+
+                                    <label for="Partenerorg">Are you an employee of one of our partner organizations?
+                                    </label>
+                                    <select class="select" name="organizations">
+
+
+                                        <option value="Deloitte India">Deloitte India</option>
+                                        <option value="Morgan Stanley India">Morgan Stanley India</option>
+
+                                        <option selected="selected" value="Other">Other</option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+
+
+                                    <label for="clg">if Not(Please specify organizations name)</label>
+                                    <input type="text" name="other_org" id="organization_other"
+                                        class="form-control" />
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-4">
+                                    <label for="acedamic">Academic Qualification</label>
+                                    <select class="select" name="qualification">
+
+                                        <option value="Post Graduation">Post Graduation</option>
+                                        <option value="Graduation">Graduation</option>
+                                        <option value="12th">12th</option>
+                                        <option value="10th or Below 10th">10th or Below 10th</option>
+                                        <option selected="selected" value="None">None</option>
+
+                                    </select>
+                                    <!-- <label for="Nationality">Nationality</label>
+                                        <input type="text" id="form3Example1q" class="form-control" /> -->
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="occupation">Occupation</label>
+                                    <input type="text" id="occupation" name="occupation" class="form-control" />
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <!-- <div class="col-md-6 mb-4">
+                                    <tr>
+                                        <td>
+                                            Languages spoken;
+                                        </td>
+                                        <br>
+                                        <td>
+                                            <input name="lang1" type="checkbox" Marathi>Marathi
+                                            <input name="lang2" type="checkbox" Hindi> Hindi
+                                            <input name="lang3" type="checkbox" English>English
+
+                                        </td>
+                                    </tr>
+                                </div> -->
+
+
+                                <!-- <div class="col-md-6 mb-4">
+                                    <label for="otherlang"> If other(Please Specify)</label>
+                                    <input name="lang4" type="text" id="lang4" class="form-control" />
+                                </div> -->
+
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md- mb-4">
+
+                                    <label for="address">Nationality</label>
+                                    <input name="nationality" type="text" id="nationality" class="form-control" />
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+
+
+                                </div>
+                            </div>
+                            <!-- <div class="row"> -->
+
+                                <!-- <div class="col-md-6 mb-4">
+
+
+                                    <label for="">Work Mode of Preference</label>
+                                    <select class="select" name="work_mode">
+
+                                        <option value="1" disabled>Mode</option>
+                                        <option value="2">At Office Center</option>
+                                        <option value="3">Work From Home</option>
+                                        <option value="4">Both</option>
+
+
+                                    </select>
+
+                                </div> -->
+                                <!-- <div class="col-md-6 mb-4">
+
+                                    <label for="Location">Location Preference</label>
+                                    <select class="select" name="loc_pref">
+
+                                        <option value="1">Outside Mumbai</option>
+                                        <option value="2">Navi Mumbai</option>
+                                        <option value="3">Central zone</option>
+                                        <option value="4">Western Zone</option>
+                                        <option value="5">Harbour Zone</option>
+                                        <option value="6">In - Office (Mahim)</option>
+                                    </select>
+
+                                </div> -->
+                            <!-- </div> -->
+                            <!-- <div class="row">
+
+                                <div class="col-md-6 mb-4">
+
+                                    <label for="Skills">Skills (Eg. Story telling, Writing skills, Technology, Data
+                                        entry etc.)</label>
+                                    <input type="text" id="skill1" name="skill1" class="form-control mb-3"
+                                        placeholder="Your skill" />
+                                    <input type="text" id="skill2" name="skill2" class="form-control mb-3"
+                                        placeholder="other skill if any" />
+                                    <input type="text" id="skill3" name="skill3" class="form-control mb-3"
+                                        placeholder="other skill if any" />
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="other">When would you prefer to volunteer?
+                                    </label>
+                                    <select class="select" name="workday_pref">
+
+                                        <option value="1">On Weekend</option>
+                                        <option value="2">On weekday</option>
+                                        <option value="3">Both</option>
+
+
+                                    </select>
+
+                                </div>
+
+                            </div> -->
+
+                            <div class="form-outline mb-4">
+                                <label for="events">Why do you wish to volunteer at Toybank?</label>
+                                <input type="text" id="wish" name="wish" class="form-control" />
+
+                            </div>
+
+
+                            <input class="next" type="submit" value="Next" />
+                            <!-- <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button> -->
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="footer">
+        <div class="container">
+            <center>
+                <p>Copyright &copy;ToyBank. All Rights Reserved | Contact Us: +91 90000 00000</p>
+            </center>
+        </div>
+    </div>
+</body>
+</head>
+
+</html>
