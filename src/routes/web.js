@@ -53,7 +53,7 @@ let initWebRoutes = (app) => {
     );
     // router.get("/admin", adminController.authenticate, adminController.getPage);
     router.get("/admin", adminController.authenticate, adminController.getPage);
-    router.get("/search", adminController.authenticate,  adminController.getvolunteer);
+    router.post("/search/:id", adminController.authenticate,  adminController.getvolunteer);
     return app.use("/", router);
 };
 module.exports = initWebRoutes;

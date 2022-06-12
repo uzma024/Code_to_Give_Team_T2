@@ -92,7 +92,7 @@
         <div class="row">
             <% for(var i=0; i < activity.length; i++) { %>
                 <div class="col-lg-4">
-                    <form action="#">
+                    <form action="/search/<%= activity[i].id %>" method="post">
                         <div class="card">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxKYw-GbA3mkPZLUnOzNUmHR4eDY4bP2QKLsxyTLtM0WepbAXS8PZCJZfEDbbp7sMxf4k&usqp=CAU"
                                 class="card-img-top" alt="...">
@@ -106,7 +106,7 @@
                                     style="background-color: lightgreen; border: none; color: black;font-weight:500;"
                                     text="edit" name="edit" class="btn btn-primary">Edit Event</button>
                                 <button
-                                    href="/search" style="background-color: lightgreen; border: none; color: black;font-weight:500;"
+                                    href="/search/<%= activity[i].id %> " style="background-color: lightgreen; border: none; color: black;font-weight:500;"
                                     text="delete" name="delete" class="btn btn-primary">View Volunteers</button>
                             </div>
                         </div>
