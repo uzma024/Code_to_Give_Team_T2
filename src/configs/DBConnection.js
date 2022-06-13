@@ -141,5 +141,28 @@ connection.query(
   }
 );
 
+// mapping table
+// connection.query(
+//   "CREATE TABLE  IF NOT EXISTS `toybank`.`mapping` ( `Vid` INT NOT NULL, `Aid` INT NOT NULL, `status` ENUM(50) NULL,`mode` varchar(45) NULL,`date` DATE NULL,`day` varchar(15) NULL, `time` Time NULL, `venue` VARCHAR(45) NULL, PRIMARY KEY (`id`), CONSTRAINT `id3` FOREIGN KEY (`Aid`) REFERENCES `toybank`.`activity_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
+//   (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Table Activity created");
+//     }
+//   }
+// );
+
+connection.query(
+  "CREATE TABLE  IF NOT EXISTS `toybank`.`mapping` ( `Mid` INT NOT NULL AUTO_INCREMENT, `Aid` INT NOT NULL,  `Vid` INT NOT NULL,  `status` ENUM('pending', 'rejected', 'accepted','show','no show') NULL , PRIMARY KEY (`Mid`),CONSTRAINT `eeid` FOREIGN KEY (`Aid`)REFERENCES `toybank`.`activity` (`id`)ON DELETE CASCADE ON UPDATE CASCADE,CONSTRAINT `vvvid`FOREIGN KEY (`Vid`)REFERENCES `toybank`.`users` (`id`)ON DELETE CASCADE ON UPDATE CASCADE)ENGINE=InnoDB DEFAULT CHARSET=utf8;",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Table mapping created");
+      }
+    }
+  );
+
 
 module.exports = connection;

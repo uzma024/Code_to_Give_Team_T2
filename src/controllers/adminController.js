@@ -1,4 +1,6 @@
+import adminServices from "../services/adminServices";
 import DBConnection from "../configs/DBConnection";
+import path from "path";
 
 let authenticate = async (req, res, next) => {
   if (!req.user) {
@@ -42,36 +44,7 @@ let getPage = async (req, res) => {
       act.date = date_string;
     });
   });
-  // DBConnection.query("select * from activity_type", (err, activity) => {
-  //     if (err) {
-  //         console.log(err);
-  //     }
-  //     render.activity = activity;
-  // });
-  // DBConnection.query(
-  //     "select job_id, title, name company, package, location, allowed_branches, allowed_gender, min_cpi from jobs natural join companies order by package desc;",
-  //     (err, jobs) => {
-  //         if (err) {
-  //             console.log(err);
-  //         }
-  //         render.jobs = jobs;
-  //         // console.log(jobs);
-  //     }
-  // );
-  // DBConnection.query(
-  //     "select application_id, fullname, job_id, name, title, package, status from applications natural join users natural join jobs natural join companies where applicant_id=id order by fullname;",
-  //     (err, applications) => {
-  //         if (err) {
-  //             console.log(err);
-  //         }
-  //         render.applications = applications;
-  //     }
-  // );
-  // console.log("render: "+ render);
-  // console.log("render: "+render.time);
-  // setTimeout(() => {
-  //     res.render("admin/adminPage.ejs", render);
-  // }, 1000);
+
   setTimeout(() => {
     res.render("admin/adminEvent.ejs", render);
   }, 1000);
@@ -85,6 +58,7 @@ let getPageAdminLogin = async (req, res) => {
 let getvolunteer = async (req, res) => {
   console.log("Rendering getvolunteer page");
   var render = {
+    act_id: req.params.id,
     matched_activity_types: "",
     // matched_location: ""
   };
@@ -92,40 +66,7 @@ let getvolunteer = async (req, res) => {
   var next=0;
   console.log("req.params.id: ", req.params.id);
   console.log("success!!!!!!! ");
-//   DBConnection.query(
-//     "select * from activity where id = ?",
-//     req.params.id,
-//     (err, activ) => {
-//       if (err) {
-//         console.log("uff error ->>>>>>>> "+err);
-//       }
-//       render.activity = activ;
-//     }
-//   );
-//   console.log("render.activity: "+render.activity);
 
-//   console.log("query1 success!!!!!!! ");
-//   DBConnection.query(
-//     "select * from activity,activity_type where activity.Aid=activity_type.id and activity.id = ?",
-//     req.params.id,
-//     (err, activity_type) => {
-//       if (err) {
-//         console.log("uff error ->>>>>>>> "+err);
-//       }
-//       render.activity_type = activity_type;
-//     }
-//   );
-//   console.log("query2 success!!!!!!! ");
-  // DBConnection.query(
-  //   "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity,activity_type where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.activity =activity_type.name and activity.Aid=activity_type.id and  activity.id=?",
-  //   req.params.id,
-  //   (err, matched_activity_types) => {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //     render.matched_activity_types = matched_activity_types;
-  //   }
-  // );
    DBConnection.query(
     "SELECT * from users,v_details,v_preferences,activity,activity_type,v_skills where users.id=v_preferences.Vid and users.id=v_details.Vid and activity.Aid=activity_type.id and v_skills.Vid=users.id and  activity.id=? and(v_preferences.activity =activity_type.name OR v_preferences.location =activity.venue OR v_preferences.work_mode =activity.mode  or v_preferences.days =activity.day) ORDER BY ( (v_preferences.activity =activity_type.name)+  (v_preferences.location =activity.venue)+ (v_preferences.work_mode =activity.mode)+ (v_preferences.days =activity.day)) DESC",
     req.params.id,
@@ -137,44 +78,40 @@ let getvolunteer = async (req, res) => {
     }
   );
   console.log("Activity success!!!!!!! ");
-  // DBConnection.query(
-  //   "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.location =activity.venue and  activity.id=?",
-  //   req.params.id,
-  //   (err, matched_location) => {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //     render.matched_location = matched_location;
-  //   }
-  // );
-  // console.log("Location success!!!!!!! ");
-  // DBConnection.query(
-  //   "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.work_mode =activity.mode and  activity.id=?",
-  //   req.params.id,
-  //   (err, matched_work_mode) => {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //     render.matched_work_mode = matched_work_mode;
-  //   }
-  // );  
-  // console.log("Work Mode success!!!!!!! ");
   
-  // DBConnection.query(
-  //   "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.days =activity.day and  activity.id=?",
-  //   req.params.id,
-  //   (err, matched_work_days) => {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //     render.matched_work_days = matched_work_days;
-  //   }
-  // );
-  // console.log("Days success!!!!!!! ");
   setTimeout(() => {
     res.render("admin/volunteerSearch.ejs", render);
   }, 1000);
 };
+
+let mapping = async (req, res) => {
+  console.log("Rendering mapping page");
+ 
+  let  act_id= req.params.id;
+  let volunteerDetailslist= req.body.v;
+  
+
+  console.log("volunteerDetailslist: ", volunteerDetailslist);
+  
+  for(var i=0;i<volunteerDetailslist.length;i++){
+    var renders = {
+      Aid: act_id,
+      Vid: volunteerDetailslist[i],
+      status: "pending",
+    };
+    try {
+        await adminServices.addmapping(renders);
+    } catch (err) {
+        req.flash("errors", err);
+    }
+  }
+  console.log("successfully added "+ volunteerDetailslist);
+  
+  return res.redirect("/search/"+req.params.id);
+  // setTimeout(() => {
+  //   res.redirect("/search/"+req.params.id);
+  // }, 100);
+}
 
 let acceptApplication = async (req, res) => {
   console.log("req.params.id: ", req.params.id);
@@ -245,6 +182,7 @@ module.exports = {
   getPage: getPage,
   getPageAdminLogin: getPageAdminLogin,
   getvolunteer: getvolunteer,
+  mapping:mapping,
   // getEditUser: getEditUser,   // getEditUser
   // deleteUser: deleteUser,   // deleteUser
   // getEditCompany: getEditCompany,   // getEditCompany

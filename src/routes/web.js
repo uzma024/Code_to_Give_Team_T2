@@ -53,7 +53,13 @@ let initWebRoutes = (app) => {
     );
     // router.get("/admin", adminController.authenticate, adminController.getPage);
     router.get("/admin", adminController.authenticate, adminController.getPage);
+
+    router.get("/search/:id", adminController.authenticate,  adminController.getvolunteer);
     router.post("/search/:id", adminController.authenticate,  adminController.getvolunteer);
+    // /mapping/<%=matched_activity_types[i].Aid%>
+
+    router.post("/mapping/:id", adminController.authenticate,  adminController.mapping);
+
     return app.use("/", router);
 };
 module.exports = initWebRoutes;
