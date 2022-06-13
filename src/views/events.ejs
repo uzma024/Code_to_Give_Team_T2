@@ -1,3 +1,4 @@
+
 <%- include("Partials/header.ejs") %>
     <div class="container my-4">
         <div class="row">
@@ -16,127 +17,28 @@
 
     <div class="container my-4">
         <div class="row">
+            <% for(var i=0; i < activity_type.length; i++) { %>
             <div class="col-lg-4">
-                <form action="#">
+                <form action="/activity/<%= activity_type[i].id %>">
                     <div class="card">
                         <img src="images\toydistri.jpg" class="card-img-top" alt="...">
                         <div class="card-body text-center">
-                            <h1 class="card-title">Toy Distribution</h1>
-                            <p class="card-text">Come and be a part of a toy distribution event, where each child gets
-                                to take home a toy of his/her own. Cheers with love!</p>
-                            <p>Venue=#</p>
-                            <p>Date=#</p>
-                            <button text="submit" name="activity_add" class="btn btn-primary">View activities</button>
-
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-lg-4">
-                <form action="#">
-                    <div class="card">
-                        <img src="images\playsession.jpg" height="190px" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h1 class="card-title">Play Session</h1>
-                            <p class="card-text">All of us are children at heart and here's an opportunity to enjoy some
-                                playtime! Conduct a play session at one of our
-                                Toybank Centres</p>
-                            <p>Venue=#</p>
-                            <p>Date=#</p>
-                            <button text="submit" name="activity_add" class="btn btn-primary">View activities</button>
-
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-lg-4">
-                <form action="#">
-                    <div class="card">
-
-                        <img src="images\toycollect.jpg" height="190px" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h1 class="card-title">Toy Collection Drives</h1>
-                            <p class="card-text">Take charge, spread the word about Toybank, and lead a toy collection
-                                drive among your community, school and friend
-                                circles.</p>
-                            <p>Venue=#</p>
-                            <p>Date=#</p>
-                            <button text="submit" name="activity_add" class="btn btn-primary">View activities</button>
+                            <h1 class="card-title"><%= activity_type[i].name %></h1>
+                            <p class="card-text"><%= activity_type[i].desc %></p>
+                            <p>Preferred Skills : <%= activity_type[i].Skill1 %>, <%= activity_type[i].Skill2 %> , <%= activity_type[i].Skill3 %> , <%= activity_type[i].Skill4 %></p>
+                            
+                            <!-- <button text="submit" name="activity_add" class="btn btn-primary">View activities</button> -->
+                            <button
+                            type="submit" text="submit" name="activity_add" class="btn btn-primary">View Activities</button>
                         </div>
                     </div>
                 </form>
             </div>
 
 
+            <% } %>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <form action="#">
-                    <div class="card">
-                        <img src="images\fundraising.jpg" height="200px" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h1 class="card-title">Fundraising
-                                ​</h1>
-                            <p class="card-text">​In our efforts to reach out to more children, raising funds is key.
-                                Help out in whatever way you can to fundraise- run a campaign.</p>
-                            <p>Venue=#</p>
-                            <p>Date=#</p>
-                            <button text="submit" name="activity_add" class="btn btn-primary">View activities</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-lg-4">
-                <form action="#">
-                    <div class="card">
-                        <img src="images\sortingtoy.jpg" height="160px" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h1 class="card-title">Sorting and Wrapping</h1>
-                            <p class="card-text">Help out at our Toy storage area by sorting and coding the toys based
-                                on their types.The toys will need to be wrapped and ready for delivered.</p>
-                            <p>Venue=#</p>
-                            <p>Date=#</p>
-                            <button text="submit" name="activity_add" class="btn btn-primary">View activities</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-
-            <div class="col-lg-4">
-                <form action="#" method="POST">
-                    <div class="card">
-                        <img src="images\research.jpg" height="180px" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h2 class="card-title">Research, Blogs and Report Writing</h2>
-                            <p class="card-text"> Help us out with research on the various aspects
-                                related to play, blog about it or even write a detailed report.</p>
-                            <p>Venue=#</p>
-                            <p>Date=#</p>
-                            <button text="submit" name="activity_add" class="btn btn-primary">View activities</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-
-        </div>
-    </div>
-
-
-    </div>
-    </div>
-
-    </div>
-
-    </div>
-    </div>
-    <br>
-    <br>
+   
 
     <%- include("Partials/footer.ejs") %>

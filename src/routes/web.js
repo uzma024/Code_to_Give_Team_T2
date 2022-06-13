@@ -5,7 +5,7 @@ import loginController from "../controllers/loginController";
 import editProfileController from "../controllers/editProfileController";
 import editPreffController from "../controllers/editPreffController";
 import skillsController from "../controllers/skillsController.js";
-
+import volunteeractivityController from "../controllers/volunteeractivityController.js";
 import adminController from "../controllers/adminController";
 import auth from "../validation/authValidation";
 import passport from "passport";
@@ -17,7 +17,7 @@ initPassportLocal();
 let router = express.Router();
 
 let initWebRoutes = (app) => {
-    // console.log("We Are in routing!");
+
     router.get("/", loginController.checkLoggedIn, homePageController.handleHelloWorld);
     router.get("/login",loginController.checkLoggedOut, loginController.getPageLogin);
     router.post("/login", passport.authenticate("local", {
@@ -38,9 +38,11 @@ let initWebRoutes = (app) => {
     router.get("/editPreff",loginController.checkLoggedIn,editPreffController.editPreference);
     router.post("/editPreff/:id", editPreffController.editPreffUser);
 
+
     router.get("/editSkill",loginController.checkLoggedIn,skillsController.editSkill);
     router.post("/editSkill/:id", skillsController.editSkillUser);
     
+    router.get("/activity/:id",loginController.checkLoggedIn,volunteeractivityController.viewactivity);
     router.get("/admin-login", adminController.getPageAdminLogin);
     router.post(
         "/admin-login",
@@ -51,6 +53,8 @@ let initWebRoutes = (app) => {
             failureFlash: true,
         })
     );
+    router.post("/apply/:id",loginController.checkLoggedIn,volunteeractivityController.apply);
+
     // router.get("/admin", adminController.authenticate, adminController.getPage);
     router.get("/admin", adminController.authenticate, adminController.getPage);
 
@@ -59,6 +63,10 @@ let initWebRoutes = (app) => {
     // /mapping/<%=matched_activity_types[i].Aid%>
 
     router.post("/mapping/:id", adminController.authenticate,  adminController.mapping);
+    
+    router.post("/reject/:id", adminController.authenticate,  adminController.reject);
+    router.post("/attended/:id", adminController.authenticate,  adminController.attended);
+    router.post("/absent/:id", adminController.authenticate,  adminController.absent);
 
     return app.use("/", router);
 };

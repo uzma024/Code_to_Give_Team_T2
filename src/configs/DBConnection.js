@@ -154,7 +154,7 @@ connection.query(
 // );
 
 connection.query(
-  "CREATE TABLE  IF NOT EXISTS `toybank`.`mapping` ( `Mid` INT NOT NULL AUTO_INCREMENT, `Aid` INT NOT NULL,  `Vid` INT NOT NULL,  `status` ENUM('pending', 'rejected', 'accepted','show','no show') NULL , PRIMARY KEY (`Mid`),CONSTRAINT `eeid` FOREIGN KEY (`Aid`)REFERENCES `toybank`.`activity` (`id`)ON DELETE CASCADE ON UPDATE CASCADE,CONSTRAINT `vvvid`FOREIGN KEY (`Vid`)REFERENCES `toybank`.`users` (`id`)ON DELETE CASCADE ON UPDATE CASCADE)ENGINE=InnoDB DEFAULT CHARSET=utf8;",
+  "CREATE TABLE  IF NOT EXISTS `toybank`.`mapping` ( `Mid` INT NOT NULL AUTO_INCREMENT, `Aid` INT NOT NULL,  `Vid` INT NOT NULL,  `status` ENUM('pending', 'rejected', 'accepted','attended','absent') NULL , PRIMARY KEY (`Mid`),CONSTRAINT `eeid` FOREIGN KEY (`Aid`)REFERENCES `toybank`.`activity` (`id`)ON DELETE CASCADE ON UPDATE CASCADE,CONSTRAINT `vvvid`FOREIGN KEY (`Vid`)REFERENCES `toybank`.`users` (`id`)ON DELETE CASCADE ON UPDATE CASCADE)ENGINE=InnoDB DEFAULT CHARSET=utf8;",
     (err, result) => {
       if (err) {
         console.log(err);

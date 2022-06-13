@@ -59,15 +59,26 @@ let getvolunteer = async (req, res) => {
   console.log("Rendering getvolunteer page");
   var render = {
     act_id: req.params.id,
+    call_name:"/search/",
+    mapped_vol:"",
     matched_activity_types: "",
     // matched_location: ""
   };
 
-  var next=0;
+  // var next=0;
   console.log("req.params.id: ", req.params.id);
   console.log("success!!!!!!! ");
 
-   DBConnection.query(
+  DBConnection.query(
+    "SELECT * from mapping,users,v_details,v_skills,v_preferences where users.id=v_preferences.Vid and users.id=v_details.Vid and v_skills.Vid=users.id and mapping.Vid=users.id and mapping.Aid=?",req.params.id,
+    (err, mapped_vol) => {
+      if (err) {
+        console.log(err);
+      }
+      render.mapped_vol = mapped_vol;
+    }
+  );
+  DBConnection.query(
     "SELECT * from users,v_details,v_preferences,activity,activity_type,v_skills where users.id=v_preferences.Vid and users.id=v_details.Vid and activity.Aid=activity_type.id and v_skills.Vid=users.id and  activity.id=? and(v_preferences.activity =activity_type.name OR v_preferences.location =activity.venue OR v_preferences.work_mode =activity.mode  or v_preferences.days =activity.day) ORDER BY ( (v_preferences.activity =activity_type.name)+  (v_preferences.location =activity.venue)+ (v_preferences.work_mode =activity.mode)+ (v_preferences.days =activity.day)) DESC",
     req.params.id,
     (err, matched_activity_types) => {
@@ -113,69 +124,62 @@ let mapping = async (req, res) => {
   // }, 100);
 }
 
-let acceptApplication = async (req, res) => {
-  console.log("req.params.id: ", req.params.id);
-  DBConnection.query(
-    "update applications set status = ? where application_id = ?",
-    ["Accepted", req.params.id],
-    (err) => {
-      if (err) {
-        console.log(err);
-      }
-    }
-  );
-  setTimeout(() => {
-    res.redirect("/admin");
-  }, 100);
-};
+let reject = async (req, res) => {
+  console.log("Rendering mapping page");
 
-let rejectApplication = async (req, res) => {
-  console.log("req.params.id: ", req.params.id);
-  DBConnection.query(
-    "update applications set status = ? where application_id = ?",
-    ["Rejected", req.params.id],
-    (err) => {
-      if (err) {
-        console.log(err);
+  let volunteerDetailslist= req.body.A;
+  for(var i=0;i<volunteerDetailslist.length;i++){
+    DBConnection.query(
+      "update mapping set status = ? where Mid = ?",
+      ["rejected", volunteerDetailslist[i]],
+      (err) => {
+        if (err) {
+          console.log(err);
+        }
       }
-    }
-  );
-  setTimeout(() => {
-    res.redirect("/admin");
-  }, 100);
-};
+    );
+  }
+  console.log("volunteers rejected the invite "+ volunteerDetailslist);
+  return res.redirect("/search/"+req.params.id);
+}
 
-let resetApplication = async (req, res) => {
-  console.log("req.params.id: ", req.params.id);
-  DBConnection.query(
-    "update applications set status = ? where application_id = ?",
-    ["Applied", req.params.id],
-    (err) => {
-      if (err) {
-        console.log(err);
-      }
-    }
-  );
-  setTimeout(() => {
-    res.redirect("/admin");
-  }, 100);
-};
+let attended = async (req, res) => {
+  console.log("Rendering mapping page");
 
-let deleteApplication = async (req, res) => {
-  console.log("req.params.id: ", req.params.id);
-  DBConnection.query(
-    "delete from applications where application_id = ?",
-    req.params.id,
-    (err) => {
-      if (err) {
-        console.log(err);
+  let volunteerDetailslist= req.body.A;
+  for(var i=0;i<volunteerDetailslist.length;i++){
+    DBConnection.query(
+      "update mapping set status = ? where Mid = ?",
+      ["attended", volunteerDetailslist[i]],
+      (err) => {
+        if (err) {
+          console.log(err);
+        }
       }
-    }
-  );
-  setTimeout(() => {
-    res.redirect("/admin");
-  }, 100);
-};
+    );
+  }
+  console.log("volunteers rejected the invite "+ volunteerDetailslist);
+  return res.redirect("/search/"+req.params.id);
+}
+
+let absent = async (req, res) => {
+  console.log("Rendering mapping page");
+
+  let volunteerDetailslist= req.body.A;
+  for(var i=0;i<volunteerDetailslist.length;i++){
+    DBConnection.query(
+      "update mapping set status = ? where Mid = ?",
+      ["absent", volunteerDetailslist[i]],
+      (err) => {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  }
+  console.log("volunteers rejected the invite "+ volunteerDetailslist);
+  return res.redirect("/search/"+req.params.id);
+}
 
 module.exports = {
   authenticate: authenticate,
@@ -183,19 +187,7 @@ module.exports = {
   getPageAdminLogin: getPageAdminLogin,
   getvolunteer: getvolunteer,
   mapping:mapping,
-  // getEditUser: getEditUser,   // getEditUser
-  // deleteUser: deleteUser,   // deleteUser
-  // getEditCompany: getEditCompany,   // getEditCompany
-  // updateCompany: updateCompany,   // updateCompany
-  // deleteCompany: deleteCompany,   // deleteCompany
-  // getEditJob: getEditJob,   // getEditJob
-  // updateJob: updateJob,   // updateJob
-  // deleteJob: deleteJob,   // deleteJob
-  // getEditRound: getEditRound,   // getEditRound
-  // updateRound: updateRound,   // updateRound
-  // deleteRound: deleteRound,   // deleteRound
-  // acceptApplication: acceptApplication,   // acceptApplication
-  // rejectApplication: rejectApplication,   // rejectApplication
-  // resetApplication: resetApplication,   // resetApplication
-  // deleteApplication: deleteApplication,   // deleteApplication
+  reject:reject,
+  attended:attended,
+  absent:absent,
 };

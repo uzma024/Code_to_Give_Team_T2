@@ -104,80 +104,99 @@
 
         </div>
 
+        <form id="myTable" action="/search/<%= act_id %>" method="post">
+            <table class="table" id="myTable">
 
-        <table class="table" id="myTable">
+                <tr>
+                    <td><input class="input1" type="checkbox" onchange="checkAll(this)" /></td>
+                    <th scope="col"> Name </th>
+                    <th scope="col"> Email </th>
+                    <th scope="col"> Contact</th>
+                    <th scope="col">Skills</th>
+                    <th scope="col">Event Preferences</th>
+                    <th scope="col"> Status </th>
+                </tr>
 
-            <tr>
-                <td><input class="input1" type="checkbox" onchange="checkAll(this)" /></td>
-                <th scope="col"> Name </th>
-                <th scope="col"> Email </th>
-                <th scope="col"> Contact</th>
-                <th scope="col">Skill1</th>
-                <th scope="col">Skill2</th>
-                <th scope="col">Skill3</th>
-                <th scope="col">Event Preferences</th>
-                <th scope="col"> Status </th>
-            </tr>
-            <tr>
-                <td><input class="input1" type="checkbox" value="1" /></td>
-                <td>Pooja</td>
-                <td>abc.com</td>
-                <td>9100000000</td>
-                <td>Story Telling</td>
-                <td>Story Telling</td>
-                <td>Story Telling</td>
-                <td>Toy Distribution</td>
-                <td>Pending</td>
-            </tr>
+                <% for(var i=0; i < mapped_vol.length; i++) { %>
+                    <tr>
+                        <td><input class="input1" type="checkbox" value="1" name="A[]>"
+                            value="<%=mapped_vol[i].Mid%>" /></td>
+                        <td>
+                            <%= mapped_vol[i].fullname%>
+                        </td>
+                        <td>
+                            <%= mapped_vol[i].email %>
+                        </td>
+                        <td>
+                            <%= mapped_vol[i].contact %>
+                        </td>
+                        <td>
+                            <%= mapped_vol[i].Skill1 %>,<%= mapped_vol[i].Skill2 %>,<%= mapped_vol[i].Skill3 %>
+                        </td>
+                        <td>
+                            <%= mapped_vol[i].activity %>
+                        </td>
+                        <td>
+                            <%= mapped_vol[i].status %>
+                        </td>
+                    </tr>
+                    <% } %>
 
-        </table>
+            </table>
+            <div class="row">
+                <div class="col-sm-6">
+                    <button onclick="Reject()" class="btn btn-primary">Reject</button>
+                    <button onclick="acceptChecked()" class="btn btn-primary">Mark as attended<br></button>
+                    <button onclick="rejectChecked()" class="btn btn-primary">Mark as absent</button>
+                </div>
+            </div>
+        </form>
+        <script>
+            function Reject(){
+                document.getElementById("myTable").action = "/reject/<%= act_id %>";
+                // document.getElementById("myTable").setAttribute("action", "/reject/<%= act_id %>");
+            }
+            function acceptChecked(){
+                document.getElementById("myTable").action = "/attended/<%= act_id %>";
+                // document.getElementById("myTable").setAttribute("action", "/reject/<%= act_id %>");
+            }
+            function rejectChecked(){
+                document.getElementById("myTable").action = "/absent/<%= act_id %>";
+                // document.getElementById("myTable").setAttribute("action", "/reject/<%= act_id %>");
+            }
+            function checkAll(e) {
+                var checkboxes = document.getElementsByClassName('input1');
+                if (e.checked) {
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        if (checkboxes[i].type == 'checkbox') {
+                            checkboxes[i].checked = 'true';
+                        }
+                    }
+                }
+                else {
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        if (checkboxes[i].type == 'checkbox') {
+                            checkboxes[i].checked = false;
+                        }
+                    }
+                }
+                return;
+            };
+
+        // function acceptChecked() {
+        //     var result = "";
+        //     var checkboxes = document.getElementsByTagName('input');
+        //     for (var i = 0; i < checkboxes.length; i++) {
+        //         if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked) {
+        //             result += "," + checkboxes[i].value;
+        //         }
+        //     }
+        //     console.log("Send request to accept " + result);
+        // };
+        </script>
         <br>
         <!-- <button text="accept" name="vol_add" class="btn btn-primary">Accept</button> -->
-        <div class="row">
-            <div class="col-sm-6">
-                <button onclick="Reject()" class="btn btn-primary">Reject</button>
-                <button onclick="acceptChecked()" class="btn btn-primary">Mark as attended<br></button>
-                <button onclick="rejectChecked()" class="btn btn-primary">Mark as absent</button>
-            </div>
-            <!-- <div class="col-sm-6">
-            <div class="shift">
-                <form action="">
-                    <button text="vol_search" name="vol_search" class="btn btn-primary">Search for volunteer</button>
-                </form>
-            </div>
-        </div> -->
-            <script>
-                function checkAll(e) {
-                    var checkboxes = document.getElementsByClassName('input1');
-                    if (e.checked) {
-                        for (var i = 0; i < checkboxes.length; i++) {
-                            if (checkboxes[i].type == 'checkbox') {
-                                checkboxes[i].checked = 'true';
-                            }
-                        }
-                    }
-                    else {
-                        for (var i = 0; i < checkboxes.length; i++) {
-                            if (checkboxes[i].type == 'checkbox') {
-                                checkboxes[i].checked = false;
-                            }
-                        }
-                    }
-                    return;
-                };
 
-            // function acceptChecked() {
-            //     var result = "";
-            //     var checkboxes = document.getElementsByTagName('input');
-            //     for (var i = 0; i < checkboxes.length; i++) {
-            //         if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked) {
-            //             result += "," + checkboxes[i].value;
-            //         }
-            //     }
-            //     console.log("Send request to accept " + result);
-            // };
-            </script>
-        </div>
     </div>
 
 
@@ -211,21 +230,46 @@
                 <tbody>
 
                     <% for(var i=0; i < matched_activity_types.length; i++) { %>
-                        <tr>
-                            <td><input class="input2" type="checkbox" id="accept" name="v[]>" value="<%=matched_activity_types[i].Vid%>">
-                                <label for="accept"></label><br>
-                            </td>
-                            <td><%= matched_activity_types[i].fullname %></td>
-                            <td><%= matched_activity_types[i].email %></td>
-                            <td><%= matched_activity_types[i].contact %></td>
-                            <td><%= matched_activity_types[i].Skill1 %>,<%= matched_activity_types[i].Skill2 %>,<%= matched_activity_types[i].Skill3 %></td>
-                            <td><%= matched_activity_types[i].activity %></td>
-                                <!-- <td>Request</td> -->
-                                <!-- <td></td> -->
+                        <% var found=false; %>
+                            <% for(var j=0; j < mapped_vol.length; j++) { %>
+                                <% if(mapped_vol[j].Aid==matched_activity_types[i].Aid &&
+                                    mapped_vol[j].Vid==matched_activity_types[i].Vid){ %>
+                                    <% found=true; %>
+                                        <% break; %>
+                                            <% } %>
+                                                <% } %>
 
-                            <td>Not Requested</td>
-                        </tr>
-                    <% } %>
+                                                    <% if(!found){ %>
+                                                        <tr>
+                                                            <td><input class="input2" type="checkbox" id="accept"
+                                                                    name="v[]>"
+                                                                    value="<%=matched_activity_types[i].Vid%>">
+                                                                <label for="accept"></label><br>
+                                                            </td>
+                                                            <td>
+                                                                <%= matched_activity_types[i].fullname %>
+                                                            </td>
+                                                            <td>
+                                                                <%= matched_activity_types[i].email %>
+                                                            </td>
+                                                            <td>
+                                                                <%= matched_activity_types[i].contact %>
+                                                            </td>
+                                                            <td>
+                                                                <%= matched_activity_types[i].Skill1 %>,<%=
+                                                                        matched_activity_types[i].Skill2 %>,<%=
+                                                                            matched_activity_types[i].Skill3 %>
+                                                            </td>
+                                                            <td>
+                                                                <%= matched_activity_types[i].activity %>
+                                                            </td>
+                                                            <!-- <td>Request</td> -->
+                                                            <!-- <td></td> -->
+
+                                                            <td>Not Requested</td>
+                                                        </tr>
+                                                        <% } %>
+                                                            <% } %>
                 </tbody>
 
             </table>
