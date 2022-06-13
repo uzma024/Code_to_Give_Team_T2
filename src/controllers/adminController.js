@@ -86,7 +86,9 @@ let getvolunteer = async (req, res) => {
   console.log("Rendering getvolunteer page");
   var render = {
     matched_activity_types: "",
+    matched_location: ""
   };
+
   var next=0;
   console.log("req.params.id: ", req.params.id);
   console.log("success!!!!!!! ");
@@ -124,7 +126,29 @@ let getvolunteer = async (req, res) => {
       render.matched_activity_types = matched_activity_types;
     }
   );
-  console.log("query2 success!!!!!!! ");
+  console.log("Activity success!!!!!!! ");
+  DBConnection.query(
+    "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.location =activity.venue and  activity.id=?",
+    req.params.id,
+    (err, matched_location) => {
+      if (err) {
+        console.log(err);
+      }
+      render.matched_location = matched_location;
+    }
+  );
+  console.log("Location success!!!!!!! ");
+  DBConnection.query(
+    "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.work_mode =activity.mode and  activity.id=?",
+    req.params.id,
+    (err, matched_work_mode) => {
+      if (err) {
+        console.log(err);
+      }
+      render.matched_work_mode = matched_work_mode;
+    }
+  );
+  console.log("work mode success!!!!!!! ");
 //   DBConnection.query(
 //     "select fullname, email,contact,location from users,v_details,v_preferences where users.id=v_preferences.Vid and v_details.Vid=v_preferences.Vid and v_preferences.location = ?",
 //     [activity.venue],

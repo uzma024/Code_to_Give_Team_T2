@@ -91,7 +91,6 @@ connection.query(
 );
 //Events
 
-
 // Activity-type table
 connection.query(
   "CREATE TABLE  IF NOT EXISTS `toybank`.`activity_type` ( `id` INT NOT NULL, `name` VARCHAR(255) NULL,`desc` VARCHAR(500) NULL,`Skill1` VARCHAR(45) NULL, `Skill2` VARCHAR(45) NULL, `Skill3` VARCHAR(45) NULL, `Skill4` VARCHAR(45) NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
@@ -105,7 +104,7 @@ connection.query(
 );
 // Activity table
 connection.query(
-  "CREATE TABLE  IF NOT EXISTS `toybank`.`activity` ( `id` INT NOT NULL, `Aid` INT NOT NULL, `name` VARCHAR(50) NULL,`date` DATE NULL,`day` varchar(15) NULL, `time` Time NULL, `venue` VARCHAR(45) NULL, PRIMARY KEY (`id`), CONSTRAINT `id3` FOREIGN KEY (`Aid`) REFERENCES `toybank`.`activity_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
+  "CREATE TABLE  IF NOT EXISTS `toybank`.`activity` ( `id` INT NOT NULL, `Aid` INT NOT NULL, `name` VARCHAR(50) NULL,`mode` varchar(45) NULL,`date` DATE NULL,`day` varchar(15) NULL, `time` Time NULL, `venue` VARCHAR(45) NULL, PRIMARY KEY (`id`), CONSTRAINT `id3` FOREIGN KEY (`Aid`) REFERENCES `toybank`.`activity_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
   (err, result) => {
     if (err) {
       console.log(err);
@@ -114,5 +113,82 @@ connection.query(
     }
   }
 );
+
+// let salt = bcrypt.genSaltSync(10);
+// Insert default set of activity types for this year
+// var sql = "INSERT INTO toybank.activity_type (id, name, desc, Skill1, Skill2, Skill3, Skill4 ) VALUES";
+// let activity_type1 = {
+//   id: 1,
+//   name: 'Play2Learn session',
+//   desc: 'Play2Learn sessions at Play2Learn centres',
+//   Skill1: 'Story Telling',
+//   Skill2: 'Crafts',
+//   Skill3: 'Painting',
+//   Skill4: ''
+// };
+// let activity_type2 = {
+//   id: 2,
+//   name: 'Play2Learn sheet translation',
+//   desc: 'Translation of English Play2Learn sheets to Hindi',
+//   Skill1: 'Hindi language proficiency',
+//   Skill2: 'English language proficiency',
+//   Skill3: 'Data entry',
+//   Skill4: ''
+// };
+// let activity_type3 = {
+//   id: 3,
+//   name: 'Play2Learn sheet translation',
+//   desc: 'Translation of English Play2Learn sheets to Marathi',
+//   Skill1: 'Marathi language proficiency',
+//   Skill2: 'English language proficiency',
+//   Skill3: 'Data entry',
+//   Skill4: ''
+// };
+// let activity_type4 = {
+//   id: 4,
+//   name: 'Hindi audio instructions',
+//   desc: 'Creation of audio instructions in Hindi',
+//   Skill1: 'Hindi language proficiency',
+//   Skill2: 'Typing',
+//   Skill3: '',
+//   Skill4: ''
+// };
+// connection.query("INSERT INTO activity_type (id, name, desc, Skill1, Skill2, Skill3, Skill4 ) VALUES ?,?,?,? ;", activity_type1,activity_type2,activity_type3,activity_type4,(err, result) => {
+//   if (err) {
+//     console.log(err);
+//     console.log("activity_type already in database");
+//   } else {
+//     console.log("activity_type created");
+//   }
+// });
+
+// Insert default set of activity types for this year 
+// Insert default set of activity types for this year
+var sql = "INSERT INTO toybank.activity_type VALUES (1, 'Play2Learn session','Play2Learn sessions at Play2Learn centres', 'Story Telling', 'Crafts', 'Painting', ''),(2, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Hindi', 'Hindi language proficiency', 'English language proficiency' , 'Data entry', ''),(3, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Marathi', 'Marathi language proficiency', 'English language proficiency' , 'Data entry', ''),(4, 'Hindi audio instructions','Creation of audio instructions in Hindi', 'Hindi language proficiency', 'Typing', '', '')";
+connection.query(
+	sql,
+	(err, result) => {
+    if (err) {
+      console.log("activity_type already in database");
+    } else {
+      console.log("Activity type entries inserted");
+    }
+  }
+);
+
+// Insert default set of activities/events for this year
+
+var sql = "INSERT INTO toybank.activity VALUES (1, 1, 'Play2Learn session at Centre1','At Office Center','2022-06-15', 'Weekday', '10:00', 'C 1, Building 1, Area A'),(2, 1, 'Play2Learn session at Centre2','At Office Center', '2022-06-15', 'Weekday', '10:00', 'C 2, Building 2, Area B'),(3, 2, 'Play2Learn sheet translation to Hindi - P124','Work from home',NULL,'','', 'ONLINE'),(4, 3, 'Play2Learn sheet translation to Marathi - P131','Work from home',NULL,'','', 'ONLINE'),(5, 4, 'Create hindi audio instructions for E1442','Work from home',NULL,'','', 'ONLINE')";
+connection.query(
+	sql,
+	(err, result) => {
+    if (err) {
+      console.log("Activity already in database");
+    } else {
+      console.log("Activity entries inserted");
+    }
+  }
+);
+
 
 module.exports = connection;

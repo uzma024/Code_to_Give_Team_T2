@@ -107,7 +107,6 @@
                     <th scope="col"> Name </th>
                     <th scope="col"> Email </th>
                     <th scope="col"> Contact</th>
-                    <th scope="col">Skills</th>
                     <th scope="col">Event Preferences</th>
                    
                     <th scope="col">Action</th>
@@ -117,13 +116,13 @@
             <tbody>
                 <% for(var i = 0; i < matched_activity_types.length; i++) { %>
                 <tr>
-                    <th><% i+1 %> </th>
+                    <td><% i+1 %> </td>
                     <td><%= matched_activity_types[i].fullname %></td>
                     <td><%= matched_activity_types[i].email %></td>
                     <td><%= matched_activity_types[i].contact %></td>
                     <td><%= matched_activity_types[i].activity %></td>
                     
-                    <td></td>
+                    <!-- <td></td> -->
                     <td><input type="checkbox" id="accept" name="accept" value="accept">
                         <label for="accept"></label><br>
                     </td>
@@ -132,6 +131,67 @@
         </table>
         <hr>
         <h2>Based on location</h2>
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">S.No </th>
+                    <th scope="col"> Name </th>
+                    <th scope="col"> Email </th>
+                    <th scope="col"> Contact</th>
+                    <!-- <th scope="col">Skills</th> -->
+                    <th scope="col">Event Preferences</th>
+                   
+                    <th scope="col">Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < matched_location.length; i++) { %>
+                <tr>
+                    <th><% i+1 %> </th>
+                    <td><%= matched_location[i].fullname %></td>
+                    <td><%= matched_location[i].email %></td>
+                    <td><%= matched_location[i].contact %></td>
+                    <td><%= matched_location[i].activity %></td>
+                    
+                    <!-- <td></td> -->
+                    <td><input type="checkbox" id="accept" name="accept" value="accept">
+                        <label for="accept"></label><br>
+                    </td>
+                    <% } %>
+            </tbody>
+        </table>
+        <h2>Based on Work Modes</h2>
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">S.No </th>
+                    <th scope="col"> Name </th>
+                    <th scope="col"> Email </th>
+                    <th scope="col"> Contact</th>
+                    <!-- <th scope="col"> Skills</th> -->
+                    <th scope="col">Event Preferences</th>
+                    <th scope="col">Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < matched_work_mode.length; i++) { %>
+                <tr>
+                    <th><% i+1 %> </th>
+                    <td><%= matched_work_mode[i].fullname %></td>
+                    <td><%= matched_work_mode[i].email %></td>
+                    <td><%= matched_work_mode[i].contact %></td>
+                    <td><%= matched_work_mode[i].activity %></td>
+                    
+                    <!-- <td></td> -->
+                    <td><input type="checkbox" id="accept" name="accept" value="accept">
+                        <label for="accept"></label><br>
+                    </td>
+                    <% } %>
+            </tbody>
+        </table>
+
         <!-- <table class="table" id="myTable">
             <thead>
                 <tr>
