@@ -114,55 +114,6 @@ connection.query(
   }
 );
 
-// let salt = bcrypt.genSaltSync(10);
-// Insert default set of activity types for this year
-// var sql = "INSERT INTO toybank.activity_type (id, name, desc, Skill1, Skill2, Skill3, Skill4 ) VALUES";
-// let activity_type1 = {
-//   id: 1,
-//   name: 'Play2Learn session',
-//   desc: 'Play2Learn sessions at Play2Learn centres',
-//   Skill1: 'Story Telling',
-//   Skill2: 'Crafts',
-//   Skill3: 'Painting',
-//   Skill4: ''
-// };
-// let activity_type2 = {
-//   id: 2,
-//   name: 'Play2Learn sheet translation',
-//   desc: 'Translation of English Play2Learn sheets to Hindi',
-//   Skill1: 'Hindi language proficiency',
-//   Skill2: 'English language proficiency',
-//   Skill3: 'Data entry',
-//   Skill4: ''
-// };
-// let activity_type3 = {
-//   id: 3,
-//   name: 'Play2Learn sheet translation',
-//   desc: 'Translation of English Play2Learn sheets to Marathi',
-//   Skill1: 'Marathi language proficiency',
-//   Skill2: 'English language proficiency',
-//   Skill3: 'Data entry',
-//   Skill4: ''
-// };
-// let activity_type4 = {
-//   id: 4,
-//   name: 'Hindi audio instructions',
-//   desc: 'Creation of audio instructions in Hindi',
-//   Skill1: 'Hindi language proficiency',
-//   Skill2: 'Typing',
-//   Skill3: '',
-//   Skill4: ''
-// };
-// connection.query("INSERT INTO activity_type (id, name, desc, Skill1, Skill2, Skill3, Skill4 ) VALUES ?,?,?,? ;", activity_type1,activity_type2,activity_type3,activity_type4,(err, result) => {
-//   if (err) {
-//     console.log(err);
-//     console.log("activity_type already in database");
-//   } else {
-//     console.log("activity_type created");
-//   }
-// });
-
-// Insert default set of activity types for this year 
 // Insert default set of activity types for this year
 var sql = "INSERT INTO toybank.activity_type VALUES (1, 'Play2Learn session','Play2Learn sessions at Play2Learn centres', 'Story Telling', 'Crafts', 'Painting', ''),(2, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Hindi', 'Hindi language proficiency', 'English language proficiency' , 'Data entry', ''),(3, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Marathi', 'Marathi language proficiency', 'English language proficiency' , 'Data entry', ''),(4, 'Hindi audio instructions','Creation of audio instructions in Hindi', 'Hindi language proficiency', 'Typing', '', '')";
 connection.query(

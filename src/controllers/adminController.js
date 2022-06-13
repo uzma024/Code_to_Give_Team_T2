@@ -86,7 +86,7 @@ let getvolunteer = async (req, res) => {
   console.log("Rendering getvolunteer page");
   var render = {
     matched_activity_types: "",
-    matched_location: ""
+    // matched_location: ""
   };
 
   var next=0;
@@ -116,8 +116,18 @@ let getvolunteer = async (req, res) => {
 //     }
 //   );
 //   console.log("query2 success!!!!!!! ");
-  DBConnection.query(
-    "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity,activity_type where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.activity =activity_type.name and activity.Aid=activity_type.id and  activity.id=?",
+  // DBConnection.query(
+  //   "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity,activity_type where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.activity =activity_type.name and activity.Aid=activity_type.id and  activity.id=?",
+  //   req.params.id,
+  //   (err, matched_activity_types) => {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //     render.matched_activity_types = matched_activity_types;
+  //   }
+  // );
+   DBConnection.query(
+    "SELECT * from users,v_details,v_preferences,activity,activity_type,v_skills where users.id=v_preferences.Vid and users.id=v_details.Vid and activity.Aid=activity_type.id and v_skills.Vid=users.id and  activity.id=? and(v_preferences.activity =activity_type.name OR v_preferences.location =activity.venue OR v_preferences.work_mode =activity.mode  or v_preferences.days =activity.day) ORDER BY ( (v_preferences.activity =activity_type.name)+  (v_preferences.location =activity.venue)+ (v_preferences.work_mode =activity.mode)+ (v_preferences.days =activity.day)) DESC",
     req.params.id,
     (err, matched_activity_types) => {
       if (err) {
@@ -127,38 +137,40 @@ let getvolunteer = async (req, res) => {
     }
   );
   console.log("Activity success!!!!!!! ");
-  DBConnection.query(
-    "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.location =activity.venue and  activity.id=?",
-    req.params.id,
-    (err, matched_location) => {
-      if (err) {
-        console.log(err);
-      }
-      render.matched_location = matched_location;
-    }
-  );
-  console.log("Location success!!!!!!! ");
-  DBConnection.query(
-    "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.work_mode =activity.mode and  activity.id=?",
-    req.params.id,
-    (err, matched_work_mode) => {
-      if (err) {
-        console.log(err);
-      }
-      render.matched_work_mode = matched_work_mode;
-    }
-  );
-  console.log("work mode success!!!!!!! ");
-//   DBConnection.query(
-//     "select fullname, email,contact,location from users,v_details,v_preferences where users.id=v_preferences.Vid and v_details.Vid=v_preferences.Vid and v_preferences.location = ?",
-//     [activity.venue],
-//     (err, matched_activity_location) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//       render.matched_activity_location = matched_activity_location;
-//     }
-//   );
+  // DBConnection.query(
+  //   "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.location =activity.venue and  activity.id=?",
+  //   req.params.id,
+  //   (err, matched_location) => {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //     render.matched_location = matched_location;
+  //   }
+  // );
+  // console.log("Location success!!!!!!! ");
+  // DBConnection.query(
+  //   "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.work_mode =activity.mode and  activity.id=?",
+  //   req.params.id,
+  //   (err, matched_work_mode) => {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //     render.matched_work_mode = matched_work_mode;
+  //   }
+  // );  
+  // console.log("Work Mode success!!!!!!! ");
+  
+  // DBConnection.query(
+  //   "select users.fullname,users.email,v_details.contact,v_preferences.activity from users,v_details,v_preferences,activity where users.id=v_preferences.Vid and users.id=v_details.Vid and v_preferences.days =activity.day and  activity.id=?",
+  //   req.params.id,
+  //   (err, matched_work_days) => {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //     render.matched_work_days = matched_work_days;
+  //   }
+  // );
+  // console.log("Days success!!!!!!! ");
   setTimeout(() => {
     res.render("admin/volunteerSearch.ejs", render);
   }, 1000);
