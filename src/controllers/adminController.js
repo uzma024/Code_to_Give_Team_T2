@@ -130,7 +130,7 @@ let mapping = async (req, res) => {
 }
 
 let reject = async (req, res) => {
-  console.log("Rendering mapping page");
+  console.log("reject function");
 
   let volunteerDetailslist= req.body.A;
   for(var i=0;i<volunteerDetailslist.length;i++){
@@ -149,7 +149,7 @@ let reject = async (req, res) => {
 }
 
 let attended = async (req, res) => {
-  console.log("Rendering mapping page");
+  console.log("attended function");
 
   let volunteerDetailslist= req.body.A;
   for(var i=0;i<volunteerDetailslist.length;i++){
@@ -168,7 +168,7 @@ let attended = async (req, res) => {
 }
 
 let absent = async (req, res) => {
-  console.log("Rendering mapping page");
+  console.log("absent function");
 
   let volunteerDetailslist= req.body.A;
   for(var i=0;i<volunteerDetailslist.length;i++){

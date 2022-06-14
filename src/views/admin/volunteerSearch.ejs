@@ -139,7 +139,7 @@
                         <td>
                             <%= mapped_vol[i].activity %>
                         </td>
-                        <td>
+                        <td id="stat">
                             <%= mapped_vol[i].status %>
                         </td>
                     </tr>
@@ -156,7 +156,7 @@
         </form>
         <script>
             function Reject(){
-                document.getElementById("myTable").action = "/reject/<%= act_id %>";.
+                document.getElementById("myTable").action = "/reject/<%= act_id %>";
                 // document.getElementById("myTable").setAttribute("action", "/reject/<%= act_id %>");
             }
             function acceptChecked(){
