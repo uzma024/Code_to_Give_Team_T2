@@ -1,5 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+  <style>
+    ul {
+        padding: 0%;
+        margin: 0 0 0 150px;
+        list-style: none;
+    }
+
+    nav {
+        width: 100%;
+        overflow: auto;
+        background: black;
+    }
+
+    li {
+        float: left;
+    }
+
+    .logo img {
+        position: absolute;
+        margin-top: 15px;
+        margin-left: 10px;
+
+    }
+
+    nav a {
+        width: 100px;
+        display: block;
+        padding: 20px 15px;
+        text-decoration: none;
+        font-family: Arial;
+        color: #f2f2f2;
+        text-align: center;
+    }
+    
+
+</style>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -34,15 +70,16 @@
   </head>
 
   <body>
-    <header id="header">
-      <nav>
-        <div class="container">
-          <div class="text-center">
-            <h1 href="/" class="nav-brand text-dark">Admin Panel</h1>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <div class="logo"><a href="#"><img
+      src="images/logo.png"
+      height="40px" width="120px"></a></div>
+<nav>
+<ul>
+  <li><a href="/login">Volunteer</a></li>
+  <li><a href="/register">Register</a></li>
+</ul>
+
+</nav>
     <div class="container">
       <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
