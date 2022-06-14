@@ -130,8 +130,8 @@ let reject = async (req, res) => {
   let volunteerDetailslist= req.body.A;
   for(var i=0;i<volunteerDetailslist.length;i++){
     DBConnection.query(
-      "update mapping set status = ? where Mid = ?",
-      ["rejected", volunteerDetailslist[i]],
+      "update mapping set status = ? where mapping.Vid = ? AND mapping.Aid= ?",
+      ["rejected", volunteerDetailslist[i], req.params.id],
       (err) => {
         if (err) {
           console.log(err);
@@ -149,8 +149,8 @@ let attended = async (req, res) => {
   let volunteerDetailslist= req.body.A;
   for(var i=0;i<volunteerDetailslist.length;i++){
     DBConnection.query(
-      "update mapping set status = ? where Mid = ?",
-      ["attended", volunteerDetailslist[i]],
+      "update mapping set status = ? where mapping.Vid = ? AND mapping.Aid= ?",
+      ["attended", volunteerDetailslist[i], req.params.id],
       (err) => {
         if (err) {
           console.log(err);
@@ -168,8 +168,8 @@ let absent = async (req, res) => {
   let volunteerDetailslist= req.body.A;
   for(var i=0;i<volunteerDetailslist.length;i++){
     DBConnection.query(
-      "update mapping set status = ? where Mid = ?",
-      ["absent", volunteerDetailslist[i]],
+      "update mapping set status = ? where mapping.Vid = ? AND mapping.Aid= ??",
+      ["absent", volunteerDetailslist[i], req.params.id],
       (err) => {
         if (err) {
           console.log(err);
