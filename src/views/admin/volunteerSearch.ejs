@@ -82,10 +82,10 @@
                 height="40px" width="120px"></a></div>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Event</a></li>
+            <li><a href="/admin">Home</a></li>
+            <!-- <li><a href="/admin">Home</a></li> -->
 
-            <li><a href="#">
+            <li><a href="/logout-admin">
                     <div style="position:absolute; right: 30px"><span class="glyphicon glyphicon-user"></span>SignOut
                     </div>
                 </a></li>
@@ -119,8 +119,11 @@
 
                 <% for(var i=0; i < mapped_vol.length; i++) { %>
                     <tr>
-                        <td><input class="input1" type="checkbox" value="1" name="A[]>"
-                            value="<%=mapped_vol[i].Mid%>" /></td>
+                        <td><input class="input1" type="checkbox" id="accept"
+                            name="A[]"
+                            value="<%=mapped_vol[i].Vid%>">
+                        <label for="accept"></label><br>
+                        </td>
                         <td>
                             <%= mapped_vol[i].fullname%>
                         </td>
@@ -153,7 +156,7 @@
         </form>
         <script>
             function Reject(){
-                document.getElementById("myTable").action = "/reject/<%= act_id %>";
+                document.getElementById("myTable").action = "/reject/<%= act_id %>";.
                 // document.getElementById("myTable").setAttribute("action", "/reject/<%= act_id %>");
             }
             function acceptChecked(){
@@ -242,7 +245,7 @@
                                                     <% if(!found){ %>
                                                         <tr>
                                                             <td><input class="input2" type="checkbox" id="accept"
-                                                                    name="v[]>"
+                                                                    name="v[]"
                                                                     value="<%=matched_activity_types[i].Vid%>">
                                                                 <label for="accept"></label><br>
                                                             </td>

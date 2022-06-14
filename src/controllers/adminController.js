@@ -54,6 +54,11 @@ let getPageAdminLogin = async (req, res) => {
   console.log("Rendering Admin login page");
   res.render("admin/adminSignIn.ejs");
 };
+let postLogOut = (req, res) => {
+  req.session.destroy(function(err) {
+      return res.redirect("/login");
+  });
+};
 
 let getvolunteer = async (req, res) => {
   console.log("Rendering getvolunteer page");
@@ -79,7 +84,7 @@ let getvolunteer = async (req, res) => {
     }
   );
   DBConnection.query(
-    "SELECT * from users,v_details,v_preferences,activity,activity_type,v_skills where users.id=v_preferences.Vid and users.id=v_details.Vid and activity.Aid=activity_type.id and v_skills.Vid=users.id and  activity.id=? and(v_preferences.activity =activity_type.name OR v_preferences.location =activity.venue OR v_preferences.work_mode =activity.mode  or v_preferences.days =activity.day) ORDER BY ( (v_preferences.activity =activity_type.name)+  (v_preferences.location =activity.venue)+ (v_preferences.work_mode =activity.mode)+ (v_preferences.days =activity.day)) DESC",
+    "SELECT * from users,v_details,v_preferences,activity,activity_type,v_skills where users.id=v_preferences.Vid and users.id=v_details.Vid and activity.Aid=activity_type.id and v_skills.Vid=users.id and  activity.id=? and(v_preferences.activity =activity_type.name OR v_preferences.location =activity.venue OR (v_preferences.work_mode =activity.mode or v_preferences.work_mode='Both')  or v_preferences.days =activity.day) ORDER BY ( (v_preferences.activity =activity_type.name)+  (v_preferences.location =activity.venue)+ (v_preferences.work_mode =activity.mode or v_preferences.work_mode='Both')+ (v_preferences.days =activity.day)) DESC",
     req.params.id,
     (err, matched_activity_types) => {
       if (err) {
@@ -158,7 +163,7 @@ let attended = async (req, res) => {
       }
     );
   }
-  console.log("volunteers rejected the invite "+ volunteerDetailslist);
+  console.log("volunteers attended the event "+ volunteerDetailslist);
   return res.redirect("/search/"+req.params.id);
 }
 
@@ -177,13 +182,14 @@ let absent = async (req, res) => {
       }
     );
   }
-  console.log("volunteers rejected the invite "+ volunteerDetailslist);
+  console.log("volunteers was absent "+ volunteerDetailslist);
   return res.redirect("/search/"+req.params.id);
 }
 
 module.exports = {
   authenticate: authenticate,
   getPage: getPage,
+  postLogOut:postLogOut,
   getPageAdminLogin: getPageAdminLogin,
   getvolunteer: getvolunteer,
   mapping:mapping,

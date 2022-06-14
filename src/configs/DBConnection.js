@@ -115,54 +115,37 @@ connection.query(
 );
 
 // Insert default set of activity types for this year
-var sql = "INSERT INTO toybank.activity_type VALUES (1, 'Play2Learn session','Play2Learn sessions at Play2Learn centres', 'Story Telling', 'Crafts', 'Painting', ''),(2, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Hindi', 'Hindi language proficiency', 'English language proficiency' , 'Data entry', ''),(3, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Marathi', 'Marathi language proficiency', 'English language proficiency' , 'Data entry', ''),(4, 'Hindi audio instructions','Creation of audio instructions in Hindi', 'Hindi language proficiency', 'Typing', '', '')";
-connection.query(
-	sql,
-	(err, result) => {
-    if (err) {
-      console.log("activity_type already in database");
-    } else {
-      console.log("Activity type entries inserted");
-    }
+var sql =
+  "INSERT INTO toybank.activity_type VALUES (1, 'Play2Learn session','Play2Learn sessions at Play2Learn centres', 'Story Telling', 'Crafts', 'Painting', ''),(2, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Hindi', 'Hindi language proficiency', 'English language proficiency' , 'Data entry', ''),(3, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Marathi', 'Marathi language proficiency', 'English language proficiency' , 'Data entry', ''),(4, 'Hindi audio instructions','Creation of audio instructions in Hindi', 'Hindi language proficiency', 'Typing', '', '')";
+connection.query(sql, (err, result) => {
+  if (err) {
+    console.log("activity_type already in database");
+  } else {
+    console.log("Activity type entries inserted");
   }
-);
+});
 
 // Insert default set of activities/events for this year
 
-var sql = "INSERT INTO toybank.activity VALUES (1, 1, 'Play2Learn session at Centre1','At Office Center','2022-06-15', 'Weekday', '10:00', 'C 1, Building 1, Area A'),(2, 1, 'Play2Learn session at Centre2','At Office Center', '2022-06-15', 'Weekday', '10:00', 'C 2, Building 2, Area B'),(3, 2, 'Play2Learn sheet translation to Hindi - P124','Work from home',NULL,'','', 'ONLINE'),(4, 3, 'Play2Learn sheet translation to Marathi - P131','Work from home',NULL,'','', 'ONLINE'),(5, 4, 'Create hindi audio instructions for E1442','Work from home',NULL,'','', 'ONLINE')";
-connection.query(
-	sql,
-	(err, result) => {
-    if (err) {
-      console.log("Activity already in database");
-    } else {
-      console.log("Activity entries inserted");
-    }
+var sql =
+  "INSERT INTO toybank.activity VALUES (1, 1, 'Play2Learn session at Centre1','At Office Center','2022-06-15', 'Weekday', '10:00', 'C 1, Building 1, Area A'),(2, 1, 'Play2Learn session at Centre2','At Office Center', '2022-06-15', 'Weekday', '10:00', 'C 2, Building 2, Area B'),(3, 2, 'Play2Learn sheet translation to Hindi - P124','Work from home',NULL,'','', 'ONLINE'),(4, 3, 'Play2Learn sheet translation to Marathi - P131','Work from home',NULL,'','', 'ONLINE'),(5, 4, 'Create hindi audio instructions for E1442','Work from home',NULL,'','', 'ONLINE')";
+connection.query(sql, (err, result) => {
+  if (err) {
+    console.log("Activity already in database");
+  } else {
+    console.log("Activity entries inserted");
   }
-);
-
-// mapping table
-// connection.query(
-//   "CREATE TABLE  IF NOT EXISTS `toybank`.`mapping` ( `Vid` INT NOT NULL, `Aid` INT NOT NULL, `status` ENUM(50) NULL,`mode` varchar(45) NULL,`date` DATE NULL,`day` varchar(15) NULL, `time` Time NULL, `venue` VARCHAR(45) NULL, PRIMARY KEY (`id`), CONSTRAINT `id3` FOREIGN KEY (`Aid`) REFERENCES `toybank`.`activity_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
-//   (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log("Table Activity created");
-//     }
-//   }
-// );
+});
 
 connection.query(
   "CREATE TABLE  IF NOT EXISTS `toybank`.`mapping` ( `Mid` INT NOT NULL AUTO_INCREMENT, `Aid` INT NOT NULL,  `Vid` INT NOT NULL,  `status` ENUM('pending', 'rejected', 'accepted','attended','absent') NULL , PRIMARY KEY (`Mid`),CONSTRAINT `eeid` FOREIGN KEY (`Aid`)REFERENCES `toybank`.`activity` (`id`)ON DELETE CASCADE ON UPDATE CASCADE,CONSTRAINT `vvvid`FOREIGN KEY (`Vid`)REFERENCES `toybank`.`users` (`id`)ON DELETE CASCADE ON UPDATE CASCADE)ENGINE=InnoDB DEFAULT CHARSET=utf8;",
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("Table mapping created");
-      }
+  (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Table mapping created");
     }
-  );
-
+  }
+);
 
 module.exports = connection;

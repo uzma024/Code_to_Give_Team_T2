@@ -32,20 +32,24 @@ let viewactivity = async (req, res) => {
 let apply = async (req, res) => {
     let mapDetails = {
       Vid: req.user.id,
-      Aid:req.params.id,
+      Aid: req.params.id,
       status: "accepted",
     };
+    // let activityid= req.params.id;
+    // let activityname= activityid.name;
+    
     volunteerServices
     try {
       await volunteerServices.addmapping(mapDetails);
-      return res.redirect("/activity/"+req.params.id);
+      return res.render("success.ejs",mapDetails);
+      // return res.redirect("/success");
+     
     } catch (err) {
         req.flash("errors", err);
         return res.redirect("/activity/"+req.params.id);
     }
  
 };
-
 
 
 module.exports = {

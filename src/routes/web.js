@@ -54,9 +54,13 @@ let initWebRoutes = (app) => {
         })
     );
     router.post("/apply/:id",loginController.checkLoggedIn,volunteeractivityController.apply);
+    // router.get("/success",loginController.checkLoggedIn,volunteeractivityController.success)
 
     // router.get("/admin", adminController.authenticate, adminController.getPage);
     router.get("/admin", adminController.authenticate, adminController.getPage);
+    
+    router.get("/logout-admin", adminController.postLogOut);
+    router.post("/logout-admin", adminController.postLogOut);
 
     router.get("/search/:id", adminController.authenticate,  adminController.getvolunteer);
     router.post("/search/:id", adminController.authenticate,  adminController.getvolunteer);
