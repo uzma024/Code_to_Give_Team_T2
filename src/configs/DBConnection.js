@@ -93,7 +93,7 @@ connection.query(
 
 // Activity-type table
 connection.query(
-  "CREATE TABLE  IF NOT EXISTS `toybank`.`activity_type` ( `id` INT NOT NULL, `name` VARCHAR(255) NULL,`desc` VARCHAR(500) NULL,`Skill1` VARCHAR(45) NULL, `Skill2` VARCHAR(45) NULL, `Skill3` VARCHAR(45) NULL, `Skill4` VARCHAR(45) NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
+  "CREATE TABLE  IF NOT EXISTS `toybank`.`activity_type` ( `id` INT NOT NULL, `name` VARCHAR(255) NULL,`desc` VARCHAR(500) NULL,`Skill1` VARCHAR(45) NULL, `Skill2` VARCHAR(45) NULL, `Skill3` VARCHAR(45) NULL, `Skill4` VARCHAR(45) NULL,`image` varchar(255) NULL , PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
   (err, result) => {
     if (err) {
       console.log(err);
@@ -116,7 +116,7 @@ connection.query(
 
 // Insert default set of activity types for this year
 var sql =
-  "INSERT INTO toybank.activity_type VALUES (1, 'Play2Learn session','Play2Learn sessions at Play2Learn centres', 'Story Telling', 'Crafts', 'Painting', ''),(2, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Hindi', 'Hindi language proficiency', 'English language proficiency' , 'Data entry', ''),(3, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Marathi', 'Marathi language proficiency', 'English language proficiency' , 'Data entry', ''),(4, 'Hindi audio instructions','Creation of audio instructions in Hindi', 'Hindi language proficiency', 'Typing', '', '')";
+  "INSERT INTO toybank.activity_type VALUES (1, 'Play2Learn session','Play2Learn sessions at Play2Learn centres', 'Story Telling', 'Crafts', 'Painting', '','http://toybank.org/images/photos/DSC01160.jpg'),(2, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Hindi', 'Hindi language proficiency', 'English language proficiency' , 'Data entry', '','https://www.at-languagesolutions.com/en/wp-content/uploads/2017/10/traduccionalternativa.jpg'),(3, 'Play2Learn sheet translation','Translation of English Play2Learn sheets to Marathi', 'Marathi language proficiency', 'English language proficiency' , 'Data entry', '','https://www.at-languagesolutions.com/en/wp-content/uploads/2017/10/traduccionalternativa.jpg'),(4, 'Hindi audio instructions','Creation of audio instructions in Hindi', 'Hindi language proficiency', 'Typing', '', '','https://cdn2.iconfinder.com/data/icons/thesquid-ink-40-free-flat-icon-pack/64/headphone-big-512.png')";
 connection.query(sql, (err, result) => {
   if (err) {
     console.log("activity_type already in database");

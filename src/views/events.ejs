@@ -21,12 +21,11 @@
             <div class="col-lg-4">
                 <form action="/activity/<%= activity_type[i].id %>">
                     <div class="card">
-                        <img src="images\toydistri.jpg" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
+                        <img style="height: 300px" src="<%= activity_type[i].image %>" alt="<%= activity_type[i].name %>">
+                            <div class="card-body text-center">
                             <h1 class="card-title"><%= activity_type[i].name %></h1>
                             <p class="card-text"><%= activity_type[i].desc %></p>
                             <p>Preferred Skills : <%= activity_type[i].Skill1 %>, <%= activity_type[i].Skill2 %> , <%= activity_type[i].Skill3 %> , <%= activity_type[i].Skill4 %></p>
-                            
                             <!-- <button text="submit" name="activity_add" class="btn btn-primary">View activities</button> -->
                             <button type="submit" class="btn btn-primary">View Activities</button>
                         </div>
