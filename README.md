@@ -10,9 +10,7 @@ Through Code to Give, we worked in teams to develop technical prototypes for one
 - [Uzma Firoz Khan](https://github.com/uzma024)
 - [Wadiya Ali](https://github.com/Wadiya003)
 - [Pooja Gulhane](https://github.com/poojagulhane)
-- [Shraddha Pawar]()
-- [Rutuja Walvekar]()
-- [Neha Patil]()
+- [Shraddha Pawar](https://github.com/aqquilin14)
 
 ## Mentors
 ---
