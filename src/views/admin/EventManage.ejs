@@ -1,0 +1,61 @@
+
+    <%- include("Partial/adminNav.ejs") %>
+    <section>
+    <div class="container my-6">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default panel-primary">
+                    <div class="panel-body back">
+                        <center>
+                            <h1 class="life">EVENT PAGE</h1>
+                            <button
+                                style="margin: 10px; height: 20%; width: 20%; background-color: lightgreen; border: none; color: black;font-weight:500;"
+                                text="add" name="add" class="btn btn-primary">Add Event</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container my-4">
+        <div class="row">
+            <% for(var i=0; i < activity.length; i++) { %>
+                <div class="col-lg-4">
+                    <form action="/search/<%= activity[i].id %>" method="post">
+                        <div class="card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxKYw-GbA3mkPZLUnOzNUmHR4eDY4bP2QKLsxyTLtM0WepbAXS8PZCJZfEDbbp7sMxf4k&usqp=CAU"
+                                class="card-img-top" alt="...">
+
+                            <div class="card-body text-center">
+                                <h1 class="card-title"><%= activity[i].name %></h1>
+                                <p class="card-text">Date :<%= activity[i].date %></p>
+                                <p>Venue :<%= activity[i].venue %></p>
+                                <p>time :<%= activity[i].time %></p>
+                                <button
+                                    style="background-color: lightgreen; border: none; color: black;font-weight:500;"
+                                    text="edit" name="edit" class="btn btn-primary">Edit Event</button>
+                                <button
+                                    href="/search/<%= activity[i].id %> " style="background-color: lightgreen; border: none; color: black;font-weight:500;"
+                                    text="delete" name="delete" class="btn btn-primary">Manage Volunteers</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    
+    </div>
+
+    </div>
+
+    </div>
+    </div>
+    <br>
+    <br>
+
+</section>
+   <!-- include footer -->
+    <%- include("Partial/adminFoot.ejs") %>

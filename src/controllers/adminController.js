@@ -6,7 +6,7 @@ let authenticate = async (req, res, next) => {
   if (!req.user) {
     console.log("not logged in");
     res.redirect("/admin-login");
-  } else if (req.user.id != -1) {
+  } else if (req.user.id != 1) {
     // 4 is database id of admin
     console.log("not admin");
     res.redirect("/admin-login");
@@ -15,8 +15,13 @@ let authenticate = async (req, res, next) => {
     next();
   }
 };
+let getDashBoard = async (req, res) => {
+  console.log("Rendering Admin Dashboard page");
+  res.render("admin/DashBoard.ejs");
 
-let getPage = async (req, res) => {
+}
+
+let getEventPage = async (req, res) => {
   console.log("Rendering Admin page, the user id is: ", req.user.id);
   var render = {
     users: "",
@@ -46,7 +51,7 @@ let getPage = async (req, res) => {
   });
 
   setTimeout(() => {
-    res.render("admin/adminEvent.ejs", render);
+    res.render("admin/EventManage.ejs", render);
   }, 1000);
 };
 
@@ -188,7 +193,8 @@ let absent = async (req, res) => {
 
 module.exports = {
   authenticate: authenticate,
-  getPage: getPage,
+  getDashBoard: getDashBoard,
+  getEventPage: getEventPage,
   postLogOut:postLogOut,
   getPageAdminLogin: getPageAdminLogin,
   getvolunteer: getvolunteer,

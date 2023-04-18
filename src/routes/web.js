@@ -57,7 +57,7 @@ let initWebRoutes = (app) => {
     // router.get("/success",loginController.checkLoggedIn,volunteeractivityController.success)
 
     // router.get("/admin", adminController.authenticate, adminController.getPage);
-    router.get("/admin", adminController.authenticate, adminController.getPage);
+    router.get("/admin", adminController.authenticate, adminController.getDashBoard);
     
     router.get("/logout-admin", adminController.postLogOut);
     router.post("/logout-admin", adminController.postLogOut);
