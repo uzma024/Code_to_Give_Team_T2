@@ -1,6 +1,184 @@
 <%- include("Partial/adminNav.ejs") %>
 <section>
-    <h1>hi</h1>
-</section>
+  <div class="banner-container mt-1 mb-5" id="featured">
+    <div class="container-fluid px-4 py-4">
+      <div class="card bg-dark text-light shadow-lg">
+        <h5 class="card-header text-uppercase">Stats </h5>
+        <div class="card-body">
+          <div class="conatiner">
+            <div class="row d-flex justify-content-around">
+              <div class="col">
+                <div class="card bg-warning text-light move-up mb-3">
+                  <img
+                    src="https://www.kindpng.com/picc/m/246-2465825_event-management-gurgaon-illustration-png-calendar-vector-transparent.png"
+                    class="rounded-cicle card-img-top"
+                    alt="..."
+                  />
 
+                  <div class="card-body">
+                    <h5 class="card-title">Active Events</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card  bg-warning text-light move-up mb-3">
+                  <img
+                    src="https://www.pngitem.com/pimgs/m/585-5855122_volunteer-hands-hd-png-download.png"
+                    class="rounded-cicle card-img-top"
+                    alt="..."
+                  />
+
+                  <div class="card-body">
+                    <h5 class="card-title">Volunteers</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card bg-warning text-light move-up mb-3">
+                  <img
+                    src="https://www.nicepng.com/png/detail/175-1753858_donations-make-donations-png.png"
+                    class="rounded-cicle card-img-top"
+                    alt="..."
+                  />
+
+                  <div class="card-body">
+                    <h5 class="card-title">Donations</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card bg-warning text-light move-up mb-3">
+                  <img
+                    src="https://w7.pngwing.com/pngs/254/9/png-transparent-volunteering-volunteer-miscellaneous-public-relations-human.png"
+                    class="rounded-cicle card-img-top"
+                    alt="..."
+                  />
+
+                  <div class="card-body">
+                    <h5 class="card-title">Activities</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-4">
+    <div class="row">
+      
+      <div class="col">
+        <div class="col-header">
+          <h3 class="mb-2 text-inline-start text-black text-uppercase">
+            Year: 2022-23
+          </h3>
+        </div>
+        <canvas id="barChart" class="charts"></canvas>
+      </div>
+      <div class="col">
+        <div class="col-header">
+          <h3 class="mb-2 text-inline-start text-black text-uppercase">
+            Shares
+          </h3>
+        </div>
+        <canvas id="myChart" class="chart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid px-4 py-4">
+    <h3 class="mb-2 text-inline-start text-black text-uppercase">
+      Top Volunteers
+    </h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <!-- <th scope="col">Email Id</th> -->
+          <th scope="col">No. of events</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <!-- <td>Otto1254@gmail.com</td> -->
+          <td>3</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <!-- <td>Otto003@gmail.com</td> -->
+          <td>3</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <!-- <td>Otto123@gmail.com</td> -->
+          <td>3</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+<script>
+  var ctx = document.getElementById("barChart").getContext("2d");
+  var barChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ],
+      datasets: [
+        {
+          label: "Events",
+          data: [12, 19, 3, 17, 28, 24, 7, 12, 19, 3, 17, 28],
+          backgroundColor: "black",
+        },
+        {
+          label: "Volunteers",
+          data: [30, 29, 5, 5, 20, 3, 10, 5, 5, 20, 3, 10],
+          backgroundColor: "#ffb300",
+        },
+      ],
+    },
+  });
+  var oilCanvas = document.getElementById("myChart");
+
+  Chart.defaults.global.defaultFontFamily = "Lato";
+  Chart.defaults.global.defaultFontSize = 18;
+
+  var oilData = {
+    labels: ["Events", "Activities", "Volunteers"],
+    datasets: [
+      {
+        data: [13, 28, 59],
+        backgroundColor: [, "#ffb300", "#000000","#fafafa"],
+      },
+    ],
+  };
+
+  var pieChart = new Chart(oilCanvas, {
+    type: "pie",
+    data: oilData,
+  });
+</script>
 <%- include("Partial/adminFoot.ejs") %>

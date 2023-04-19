@@ -1,5 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+  
+  img{
+    min-height: 100px;
+    max-height: 100px;
+  }
+  .logo{
+    
+    min-height: 40px !important;
+    max-height: 40px !important;
+
+  }
+  .chart{
+    display: flex !important;
+    margin: auto ;
+    width: 280px !important;
+    height: 280px !important;
+  }
+  
+  .charts{
+    display: flex !important;
+  }
+  
+  @media screen and (max-width: 600px){
+    .chart{
+      display: block ;
+      margin: auto ;
+      width: 280px !important;
+      height: 280px !important;
+    }
+    .charts{
+        display: block !important;
+    }
+    
+  }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,12 +53,11 @@
     
 
 
-<nav class="navbar navbar-dark navbar-expand-sm bg-dark fixed-top">
+<nav class="navbar navbar-dark navbar-expand-sm text-light bg-dark">
     <div class="container">
-    <a href="/" class="navbar-brand">
-    <i class="fas fa-blog"></i> &nbsp;
-    Blog Template
-    </a>
+        <a class="navbar-brand h-25 w-25" href="/admin">
+            <img src="https://th.bing.com/th/id/R.89ea81e1906d12b4390b0b70f39aa471?rik=vo5XhGN1MP7QFg&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fpng-logo-design-design-png-hd-1250.png&ehk=PTSp6EHLbcJ%2fFkzlJhFcSV%2bI5RPa9H2nw8A4XjQ3ulA%3d&risl=&pid=ImgRaw&r=0" class=" logo" alt="">
+        </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
