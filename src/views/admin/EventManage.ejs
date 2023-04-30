@@ -1,55 +1,108 @@
 
-    <%- include("Partial/adminNav.ejs") %>
-    <section>
-    <div class="container my-6">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default panel-primary">
-                    <div class="panel-body back">
-                        <center>
-                            <h1 class="life">EVENT PAGE</h1>
-                            <button
-                                style="margin: 10px; height: 20%; width: 20%; background-color: lightgreen; border: none; color: black;font-weight:500;"
-                                text="add" name="add" class="btn btn-primary">Add Event</button>
-                        </center>
+<%- include("Partial/adminNav.ejs") %>
+<section>
+    <header class="header">
+        <h1 id="title" class="text-center">Manage Events</h1>
+        <p id="description" class="text-center">
+           Create, Update and Delete Events
+        </p>
+    </header>
+    <div class="form-wrap">	
+        <form id="event-form" action="/admin/EventManage" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label id="name-label" for="name">Name</label>
+                        <input type="text" name="name" id="name" placeholder="Enter event name" class="form-control" required>
+                        <label id="image-label" for="Image">Image</label>
+                        <input type="file" class="form-control" name="image" id="image" required/>
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <label id="skill-label" for="skill">Required Skills</label>
+                    <div class="input-group">
+                        
+                        <input type="text" name="skill1" id="skill1" placeholder="Enter Skill-1" class="form-control" required>
+                        <input type="text" name="skill2" id="skill2" placeholder="Enter Skill-2" class="form-control" required>
+                        <input type="text" name="skill3" id="skill3" placeholder="Enter Skill-3" class="form-control" required>
+                        <input type="text" name="skill4" id="skill4" placeholder="Enter Skill-4" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea  id="description" class="form-control" name="description" placeholder="Enter your comment here..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="submit" id="submit" class="btn btn-primary btn-block">Add</button>
+                </div>
+            </div>
+
+        </form>
+    </div>	
+</div>
+<div class="container my-6">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default panel-primary">
+                <div class="panel-body back">
+                    <center>
+                        <h1 class="life">ALL EVENTS</h1>
+
+                    </center>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
+<div class="container my-4">
+    <div class="row">
+        <% for(var i=0; i < activity_type.length; i++) { %>
+            <div class="col-lg-4">
+                
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxKYw-GbA3mkPZLUnOzNUmHR4eDY4bP2QKLsxyTLtM0WepbAXS8PZCJZfEDbbp7sMxf4k&usqp=CAU"
+                            class="card-img-top" alt="...">
 
-    <div class="container my-4">
-        <div class="row">
-            <% for(var i=0; i < activity.length; i++) { %>
-                <div class="col-lg-4">
-                    <form action="/search/<%= activity[i].id %>" method="post">
-                        <div class="card">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxKYw-GbA3mkPZLUnOzNUmHR4eDY4bP2QKLsxyTLtM0WepbAXS8PZCJZfEDbbp7sMxf4k&usqp=CAU"
-                                class="card-img-top" alt="...">
-
-                            <div class="card-body text-center">
-                                <h1 class="card-title"><%= activity[i].name %></h1>
-                                <p class="card-text">Date :<%= activity[i].date %></p>
-                                <p>Venue :<%= activity[i].venue %></p>
-                                <p>time :<%= activity[i].time %></p>
+                        <div class="card-body text-center">
+                            <h1 class="card-title"><%= activity_type[i].name %></h1>
+                           <p><%=activity_type[i].desc%></p>
+                           <form action="submit" method="post">
+                            <button
+                                style="background-color: lightgreen; border: none; color: black;font-weight:500;" type="submit"
+                                value="delete" name="delete" formaction="/admin/EventManage/delete/<%= activity_type[i].id %>" class="btn btn-primary">Delete 
+                            </button>
+                            </form> 
                                 <button
-                                    style="background-color: lightgreen; border: none; color: black;font-weight:500;"
-                                    text="edit" name="edit" class="btn btn-primary">Edit Event</button>
-                                <button
-                                    href="/search/<%= activity[i].id %> " style="background-color: lightgreen; border: none; color: black;font-weight:500;"
-                                    text="delete" name="delete" class="btn btn-primary">Manage Volunteers</button>
+                                style="background-color: lightgreen; border: none; color: black;font-weight:500;" type="submit"
+                                value="update" name="update" formaction="/admin/EventManage/update/<%= activity_type[i].id %>"
+                                class="btn btn-primary">Update 
+                                </button>
+                          
+                            <form action="submit" method="get">
+                            <button
+                                style="background-color: lightgreen; border: none; color: black;font-weight:500;" type="submit"
+                                class="btn btn-primary" value="activity" formaction="/admin/EventManage/<%= activity_type[i].id %>" name="activity">Manage Activities</button>
+                            </form>
                             </div>
-                        </div>
-                    </form>
-                </div>
-            <% } %>
-        </div>
+                    </div>
+               
+            </div>
+        <% } %>
     </div>
+</div>
     
-    </div>
 
-    </div>
+    </div> 
 
     </div>
     </div>

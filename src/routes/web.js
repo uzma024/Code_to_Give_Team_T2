@@ -56,12 +56,17 @@ let initWebRoutes = (app) => {
     router.post("/apply/:id",loginController.checkLoggedIn,volunteeractivityController.apply);
     // router.get("/success",loginController.checkLoggedIn,volunteeractivityController.success)
 
-    // router.get("/admin", adminController.authenticate, adminController.getPage);
+  
     router.get("/admin", adminController.authenticate, adminController.getDashBoard);
+    router.get("/admin/EventManage", adminController.authenticate, adminController.getEventPage);
+    router.post("/admin/EventManage", adminController.authenticate, adminController.addEvent);
+    router.get("/admin/EventManage/:id", adminController.authenticate, adminController.getActivity)
     
+    router.post("/admin/EventManage/delete/:id", adminController.authenticate, adminController.eventdelete);router.post("/admin/EventManage/:id", adminController.authenticate, adminController.addActivity);
+    router.post("/admin/EventManage/deleteActivity/:id", adminController.authenticate, adminController.activityDelete);
     router.get("/logout-admin", adminController.postLogOut);
     router.post("/logout-admin", adminController.postLogOut);
-
+   
     router.get("/search/:id", adminController.authenticate,  adminController.getvolunteer);
     router.post("/search/:id", adminController.authenticate,  adminController.getvolunteer);
     // /mapping/<%=matched_activity_types[i].Aid%>

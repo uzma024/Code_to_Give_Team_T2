@@ -1,0 +1,137 @@
+
+<%- include("Partial/adminNav.ejs") %>
+<section>
+    <header class="header">
+        <h1 id="title" class="text-center">Manage Activity</h1>
+        <p id="description" class="text-center">
+           Create, Update and Delete Activity of Event
+        </p>
+    </header>
+    <div class="form-wrap">	
+        <!-- <%=act_id%> -->
+        <form id="survey-form" action="/admin/EventManage/<%=act_id%>" method="post">
+            <div class="row">
+                <div class="col-md-6">
+					<div class="form-group">
+                        <label id="name-label" for="name">Name</label>
+                        <input type="text" name="name" id="name" placeholder="Enter activity name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        
+                        <div class="col-md-6">
+                            <label id="mode" for="Mode">Mode</label>
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline1" value="offline" name="mode" class="custom-control-input" checked="">
+                                <label class="custom-control-label" for="customRadioInline1">Offline</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline2" value="online" name="mode" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline2">Online</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="cs-form">
+                        <label id="time-label" for="date">Time</label>
+                        <input type="time" class="form-control"  name="time" value="10:00 AM" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="cs-form">
+                        <label id="date-label" for="date">Date</label>
+                        <!-- disable past date input -->
+                        <input id="date" type="date" class="form-control"  name="date" data-provide="datepicker" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Venue</label>
+                        <textarea  id="comments" class="form-control" name="location" placeholder="Enter address (in case of offline activity)"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="submit" id="submit" class="btn btn-primary btn-block">Add</button>
+                </div>
+            </div>
+
+        </form>
+    </div>	
+</div>
+<div class="container my-6">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default panel-primary">
+                <div class="panel-body back">
+                    <center>
+                        <h1 class="life">ALL ACTIVITIES<h1>
+
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</div> 
+<div class="container my-4">
+        <div class="row">
+            <% for(var i=0; i < activity.length; i++) { %>
+                <div class="col-lg-4">
+                    <form action="submit" method="post">
+                        <div class="card">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxKYw-GbA3mkPZLUnOzNUmHR4eDY4bP2QKLsxyTLtM0WepbAXS8PZCJZfEDbbp7sMxf4k&usqp=CAU"
+                                class="card-img-top" alt="...">
+
+                            <div class="card-body text-center">
+                                <h1 class="card-title"><%= activity[i].name %></h1>
+                                <p class="card-text">Date :<%= activity[i].date %></p>
+                                <p>Venue :<%= activity[i].venue %></p>
+                                <p>time :<%= activity[i].time %></p>
+                                <button
+                                    style="background-color: lightgreen; border: none; color: black;font-weight:500;"
+                                    text="delete" name="delete" class="btn btn-primary" formaction="/admin/EventManage/deleteActivity/<%= activity[i].id %>">Delete</button>
+                                    <button
+                                    style="background-color: lightgreen; border: none; color: black;font-weight:500;"
+                                    text="update" name="update" class="btn btn-primary">Update</button>
+                                <button
+                                    href="/search/<%= activity[i].id %> " style="background-color: lightgreen; border: none; color: black;font-weight:500;"
+                                     class="btn btn-primary" formaction="/search/<%= activity[i].id %>">Manage Volunteers</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    
+    </div>
+</div>
+</div>
+<br>
+<br>
+
+</section>
+<script>
+ var date = new Date();
+date.setDate(date.getDate());
+
+$('#date').datepicker({ 
+    startDate: date
+});
+</script>
+<!-- include footer -->
+<%- include("Partial/adminFoot.ejs") %>

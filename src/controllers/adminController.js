@@ -1,5 +1,6 @@
 import adminServices from "../services/adminServices";
 import DBConnection from "../configs/DBConnection";
+
 import path from "path";
 
 let authenticate = async (req, res, next) => {
@@ -23,24 +24,20 @@ let getDashBoard = async (req, res) => {
 
 let getEventPage = async (req, res) => {
   console.log("Rendering Admin page, the user id is: ", req.user.id);
+ 
   var render = {
-    users: "",
-    activity: "",
+    // users: "",
+    activity_type: "",
     day: "",
   };
-  DBConnection.query("select * from users", (err, users) => {
+ 
+  DBConnection.query("select * from activity_type", (err, activity) => {
     if (err) {
       console.log(err);
     }
-    render.users = users;
-  });
-  DBConnection.query("select * from activity", (err, activity) => {
-    if (err) {
-      console.log(err);
-    }
-    render.activity = activity;
+    render.activity_type = activity;
     // render.rounds = rounds;
-    render.activity.forEach((act) => {
+    render.activity_type.forEach((act) => {
       var date = new Date(act.date);
       var month = date.getMonth() + 1;
       var year = date.getFullYear();
@@ -54,6 +51,134 @@ let getEventPage = async (req, res) => {
     res.render("admin/EventManage.ejs", render);
   }, 1000);
 };
+let addEvent = async (req, res) => {
+  console.log("Adding new event");
+  var event = {
+    //default value for id is incremented automatically
+    // id: 5,
+    name: req.body.name,
+    desc: req.body.description,
+    skill1: req.body.skill1,
+    skill2: req.body.skill2,
+    skill3: req.body.skill3,
+    skill4: req.body.skill4,
+    image : req.body.image,
+  };
+  // console.log("Here: ",event);
+  try {
+    await adminServices.createNewEvent(event);
+    return res.redirect("/admin/EventManage");
+  } catch (err) {
+    req.flash("errors", err);
+    return res.redirect("/admin/EventManage");
+}
+}
+
+let getActivity=async(req,res)=>{
+    console.log("Rendering getactivity page");
+
+    var render = {
+      act_id: req.params.id,
+      call_name:"/admin/EventManage/",
+      activity:"",
+      matched_activity_types: "",
+      // matched_location: ""
+    };
+    
+    DBConnection.query(
+      "SELECT * from activity where AID = ? ",req.params.id,
+      (err, activity) => {
+        if (err) {
+          console.log(err);
+        }
+        render.activity = activity;
+      }
+    );
+  // console.log(render);
+  setTimeout(() => {
+    res.render("admin/ActivityManage.ejs", render);
+  }, 1000);
+
+}
+let addActivity=async(req,res)=>{
+
+  console.log("Adding new activity");
+  let eventId=req.params.id; 
+  //add activity to activity table whose id is eventId
+  var activity = {
+    name: req.body.name,
+    mode: req.body.mode,
+    time : req.body.time,
+    date : req.body.date,
+    location : req.body.location
+  }
+  
+  try {
+    await adminServices.createNewActivity(activity,eventId);
+    return res.redirect("/admin/EventManage/"+eventId);
+  }
+  catch(err){
+    console.log(err);
+  }
+ 
+}
+let eventdelete=async(req,res)=>{
+  console.log("Deleting activity");
+  var render = {
+    act_id: req.params.id,
+    call_name:"/admin/EventManage/delete/",
+    activity:"",
+  };
+  DBConnection.query(
+    "DELETE from activity_type where id = ? ",req.params.id,
+    (err, activity) => {
+      if (err) {
+        console.log(err);
+      }
+      render.activity = activity;
+    }
+  );
+  setTimeout(() => {
+    res.redirect("/admin/EventManage");
+  }, 1000);
+}
+
+let activityDelete=async(req,res)=>{
+  console.log("Deleting activity");
+  var render = {
+    act_id: req.params.id,
+    call_name:"/admin/EventManage/deleteActivity/",
+    activity:"",
+  };
+ 
+  var aid;
+  DBConnection.query(
+    "SELECT aid from activity where id = ? ",req.params.id,
+    (err, activity) => {
+      if (err) {
+        console.log(err);
+      }
+      aid = activity[0].aid;
+      console.log("aid: ",aid)
+    }
+  );
+  DBConnection.query(
+    "DELETE from activity where id = ? ",req.params.id, 
+    (err) => {
+      if (err) {
+        console.log(err);
+      }
+     console.log("Deleted activity")
+      
+    }
+  );
+  
+  setTimeout(() => {
+    res.redirect("/admin/EventManage/"+aid);
+  }, 1000);
+}
+
+
 
 let getPageAdminLogin = async (req, res) => {
   console.log("Rendering Admin login page");
@@ -101,7 +226,7 @@ let getvolunteer = async (req, res) => {
   console.log("Activity success!!!!!!! ");
   
   setTimeout(() => {
-    res.render("admin/volunteerSearch.ejs", render);
+    res.render("admin/volunteerManage.ejs", render);
   }, 1000);
 };
 
@@ -195,6 +320,11 @@ module.exports = {
   authenticate: authenticate,
   getDashBoard: getDashBoard,
   getEventPage: getEventPage,
+  addEvent: addEvent,
+  eventdelete: eventdelete,
+  activityDelete: activityDelete,
+  getActivity: getActivity,
+  addActivity: addActivity,
   postLogOut:postLogOut,
   getPageAdminLogin: getPageAdminLogin,
   getvolunteer: getvolunteer,
